@@ -31,26 +31,34 @@
     /*================================
     sidebar menu
     ==================================*/
-    $("#menu").metisMenu();
+    try {
+        $("#menu").metisMenu();
+    } catch (e) {
+        console.error(e)
+    }
 
     /*================================
     slimscroll activation
     ==================================*/
-    $('.menu-inner').slimScroll({
-        height: 'auto'
-    });
-    $('.nofity-list').slimScroll({
-        height: '435px'
-    });
-    $('.timeline-area').slimScroll({
-        height: '500px'
-    });
-    $('.recent-activity').slimScroll({
-        height: 'calc(100vh - 114px)'
-    });
-    $('.settings-list').slimScroll({
-        height: 'calc(100vh - 158px)'
-    });
+    try {
+        $('.menu-inner').slimScroll({
+            height: 'auto'
+        });
+        $('.nofity-list').slimScroll({
+            height: '435px'
+        });
+        $('.timeline-area').slimScroll({
+            height: '500px'
+        });
+        $('.recent-activity').slimScroll({
+            height: 'calc(100vh - 114px)'
+        });
+        $('.settings-list').slimScroll({
+            height: 'calc(100vh - 158px)'
+        });
+    } catch (e) {
+        console.error(e)
+    }
 
     /*================================
     stickey Header
@@ -112,9 +120,13 @@
     /*================================
     Slicknav mobile menu
     ==================================*/
-    $('ul#nav_menu').slicknav({
-        prependTo: "#mobile_menu"
-    });
+    try {
+        $('ul#nav_menu').slicknav({
+            prependTo: "#mobile_menu"
+        });
+    } catch (e) {
+        console.error(e)
+    }
 
     /*================================
     login form

@@ -23,7 +23,7 @@ public class index extends HttpServlet {
 
     public void init() {
         try {
-            Connection conn = dbConnect.getConnect(this.getServletContext());
+            conn = dbConnect.getConnect(this.getServletContext());
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
