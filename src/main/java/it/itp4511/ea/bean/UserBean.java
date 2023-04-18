@@ -1,6 +1,8 @@
 package it.itp4511.ea.bean;
 
-public class UserBean {
+import java.io.Serializable;
+
+public class UserBean implements Serializable {
     private String email;
     private String id;
     private String username;
