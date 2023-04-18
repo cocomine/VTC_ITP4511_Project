@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: rogui
   Date: 18/4/2023
-  Time: 1:56
+  Time: 17:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login - EPL</title>
+    <title>Register - EPL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -27,42 +27,53 @@
 <div id="preloader">
     <div class="loader"></div>
 </div>
-
-<!--Login From Start-->
+<!-- login area start -->
 <div class="login-area login-s2">
     <div class="container">
         <div class="login-box ptb--100">
-            <form method="post">
+            <form>
                 <div class="login-form-head">
-                    <h2>Sign In</h2>
+                    <h4>Sign up</h4>
+                    <p>Hello there, Sign up and Join with Us</p>
                 </div>
-
-                <%--if ($login_error) {
-                    echo "<div class='alert alert-danger' role='alert'>Login information error!</div>";
-                }--%>
-
                 <div class="login-form-body">
                     <div class="form-gp">
-                        <label for="email">Email</label>
-                        <input type="text" id="email" name="email">
-
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username">
+                        <i class="ti-user"></i>
                     </div>
                     <div class="form-gp">
-                        <label for="pwd">Password</label>
-                        <input type="password" id="pwd" name="pwd">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email">
+                        <i class="ti-email"></i>
+                    </div>
+                    <div class="form-gp">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" name="phone">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="form-gp">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password">
+                        <i class="ti-lock"></i>
+                    </div>
+                    <div class="form-gp">
+                        <label for="C_password">Confirm Password</label>
+                        <input type="password" id="C_password" name="C_password">
+                        <i class="ti-lock"></i>
                     </div>
                     <div class="submit-btn-area">
-                        <button id="form_submit" type="submit" class="btn btn-rounded btn-primary mb-3">Submit</button>
+                        <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
                     </div>
                     <div class="form-footer text-center mt-5">
-                        <p class="text-light">Don't have an account? <a href="register">Sign up</a></p>
+                        <p class="text-light">Have an account? <a href="login">Sign in</a></p>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!--Login From End-->
+<!-- login area end -->
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"

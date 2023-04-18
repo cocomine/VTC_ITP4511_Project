@@ -5,7 +5,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="">XXX</a>
+            <a href="">EPL</a>
         </div>
     </div>
     <div class="main-menu">
