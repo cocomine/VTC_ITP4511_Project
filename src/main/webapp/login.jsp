@@ -33,7 +33,7 @@
 <div class="login-area login-s2">
     <div class="container">
         <div class="login-box ptb--100">
-            <form method="post">
+            <form method="post" action="login">
                 <div class="login-form-head">
                     <h2>Sign In</h2>
                 </div>

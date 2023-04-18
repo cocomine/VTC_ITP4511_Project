@@ -33,7 +33,7 @@
 <div class="login-area login-s2">
     <div class="container">
         <div class="login-box ptb--100">
-            <form method="post" novalidate>
+            <form method="post" novalidate action="register">
                 <div class="login-form-head">
                     <h4>Sign up</h4>
                     <p>Hello there, Sign up and Join with Us</p>

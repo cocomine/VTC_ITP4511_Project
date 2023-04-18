@@ -74,7 +74,7 @@ public class login extends HttpServlet {
 
             if (rs.next()) {
                 // check if password is correct
-                if (rs.getString("password").equals(DigestUtils.sha256Hex(password))) {
+                if (rs.getString("password").equals(DigestUtils.sha512Hex(password))) {
                     // login success
                     UserBean user = new UserBean(rs.getString("UUID"), rs.getString("email"), rs.getString("username"), rs.getString("phone"), rs.getInt("role"));
                     request.getSession().setAttribute("user", user);
