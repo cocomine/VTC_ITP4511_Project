@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: rogui
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
 <html class="login" lang="en">
 <head>
     <meta charset="utf-8">
@@ -31,36 +33,49 @@
 <div class="login-area login-s2">
     <div class="container">
         <div class="login-box ptb--100">
-            <form>
+            <form method="post" novalidate>
                 <div class="login-form-head">
                     <h4>Sign up</h4>
                     <p>Hello there, Sign up and Join with Us</p>
                 </div>
+
+                <alert:danger display="${!empty error_msg}">
+                    ${error_msg}
+                </alert:danger>
+                <alert:success display="${!empty success_msg}">
+                    ${success_msg}
+                </alert:success>
+
                 <div class="login-form-body">
                     <div class="form-gp">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username">
+                        <input type="text" id="username" name="username" maxlength="20" required>
                         <i class="ti-user"></i>
+                        <div class="invalid-feedback">Required field</div>
                     </div>
                     <div class="form-gp">
                         <label for="email">Email address</label>
-                        <input type="email" id="email" name="email">
+                        <input type="email" id="email" name="email" maxlength="100" required>
                         <i class="ti-email"></i>
+                        <div class="invalid-feedback">Required field</div>
                     </div>
                     <div class="form-gp">
                         <label for="phone">Phone</label>
-                        <input type="text" id="phone" name="phone">
+                        <input type="text" id="phone" name="phone" maxlength="8" required>
                         <i class="fa fa-phone"></i>
+                        <div class="invalid-feedback">Required field</div>
                     </div>
                     <div class="form-gp">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password">
+                        <input type="password" id="password" name="password" required>
                         <i class="ti-lock"></i>
+                        <div class="invalid-feedback">Required field</div>
                     </div>
                     <div class="form-gp">
                         <label for="C_password">Confirm Password</label>
-                        <input type="password" id="C_password" name="C_password">
+                        <input type="password" id="C_password" name="C_password" required>
                         <i class="ti-lock"></i>
+                        <div class="invalid-feedback">Required field</div>
                     </div>
                     <div class="submit-btn-area">
                         <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>

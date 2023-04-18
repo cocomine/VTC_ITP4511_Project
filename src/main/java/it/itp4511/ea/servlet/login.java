@@ -7,11 +7,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -24,7 +26,7 @@ public class login extends HttpServlet {
 
     public void init() {
         try {
-            Connection conn = dbConnect.getConnect(this.getServletContext());
+            conn = dbConnect.getConnect(this.getServletContext());
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -45,17 +47,57 @@ public class login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/json");
-        PrintWriter out = response.getWriter();
-        JSONObject json = new JSONObject();
-
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
         if(conn == null) {
-            response.setStatus(500);
-            json.put("message", "Internal server error");
-            out.println(json);
+            request.setAttribute("error_msg", "Database connection error");
+            requestDispatcher.forward(request, response);
             return;
         }
 
-        //todo: login
+        /* start login */
+        // get parameters
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        // check if all fields are filled
+        if(email.isEmpty() || password.isEmpty()) {
+            request.setAttribute("error_msg", "Please fill all fields");
+            requestDispatcher.forward(request, response);
+            return;
+        }
+
+        // get user from db
+        try{
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM User WHERE email = ?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                // check if password is correct
+                if(rs.getString("password").equals(DigestUtils.sha256Hex(password))) {
+                    // login success
+                    JSONObject user = new JSONObject();
+                    user.put("id", rs.getInt("UUID"));
+                    user.put("username", rs.getString("username"));
+                    user.put("email", rs.getString("email"));
+                    user.put("phone", rs.getString("phone"));
+                    user.put("role", rs.getString("role"));
+
+                    request.getSession().setAttribute("user", user);
+                    response.sendRedirect("");
+                    return;
+                }
+            }
+
+            // login failed
+            request.setAttribute("error_msg", "Incorrect password");
+            requestDispatcher.forward(request, response);
+        }catch (SQLException e) {
+            e.printStackTrace();
+
+            request.setAttribute("error_msg", "Database connection error");
+            requestDispatcher.forward(request, response);
+        }
+
     }
 }

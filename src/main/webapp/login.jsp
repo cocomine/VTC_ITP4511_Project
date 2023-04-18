@@ -1,3 +1,4 @@
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
 <%--
   Created by IntelliJ IDEA.
   User: rogui
@@ -37,9 +38,9 @@
                     <h2>Sign In</h2>
                 </div>
 
-                <%--if ($login_error) {
-                    echo "<div class='alert alert-danger' role='alert'>Login information error!</div>";
-                }--%>
+                <alert:danger display="${!empty error_msg}">
+                    ${error_msg}
+                </alert:danger>
 
                 <div class="login-form-body">
                     <div class="form-gp">
@@ -48,8 +49,8 @@
 
                     </div>
                     <div class="form-gp">
-                        <label for="pwd">Password</label>
-                        <input type="password" id="pwd" name="pwd">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password">
                     </div>
                     <div class="submit-btn-area">
                         <button id="form_submit" type="submit" class="btn btn-rounded btn-primary mb-3">Submit</button>
