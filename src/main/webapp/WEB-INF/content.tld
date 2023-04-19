@@ -30,5 +30,38 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    <tag>
+        <name>content</name>
+        <tag-class>it.itp4511.ea.taglib.content.content</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>
+    <tag>
+        <name>directory</name>
+        <tag-class>it.itp4511.ea.taglib.content.directory</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>pageTitle</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <name>header</name>
+        <tag-class>it.itp4511.ea.taglib.content.header</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>
+    <tag>
+        <name>profile</name>
+        <tag-class>it.itp4511.ea.taglib.content.profile</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>username</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
 </taglib>

@@ -8,6 +8,7 @@
 <%
     if(session.getAttribute("user") == null){
         response.sendRedirect("login");
+        return;
     }
 %>
 <html class="manager-view-item" lang="en">
