@@ -1,4 +1,4 @@
-<%! String title = "View Order"; %>
+<%! String title = "View Customer"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
@@ -21,8 +21,8 @@
 <content:main>
     <content:header>
         <content:directory pageTitle="<%=title%>">
-            <li><a href="">Order</a></li>
-            <li><span>View Order</span></li>
+            <li><a href="">Account Management</a></li>
+            <li><span>View Customer</span></li>
         </content:directory>
         <content:profile username="${user.username}"/>
     </content:header>
@@ -33,25 +33,33 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Order List</h4>
+                        <h4 class="header-title">Customer List</h4>
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
                                 <tr>
-                                    <th>Account ID</th>
-                                    <th>Username</th>
-                                    <th>Customer's Email</th>
-                                    <th>Customer's Phone</th>
-                                    <th>Staff ID</th>
-                                    <th>Staff's Name</th>
-                                    <th>Order Date & Time</th>
-                                    <th>Delivery Address</th>
-                                    <th>Delivery Date</th>
-                                    <th>Total Price</th>
-                                    <th>Action</th>
+                                    <th>Customer ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Details</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Brendon Cho</td>
+                                    <td>brendonCho123@gmail.com</td>
+                                    <td>97637612</td>
+                                    <td><i class="ti-layout"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Kai Au</td>
+                                    <td>kaiau1199@yahoo.com.hk</td>
+                                    <td>67634412</td>
+                                    <td><i class="ti-layout"></i></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -127,10 +135,5 @@
         </div>
     </div>
 </div>
-
-<!-- load this page script -->
-<content:script>
-    <content:scriptPath path="./assets/js/page/view-order.js" />
-</content:script>
 
 <%@ include file="function/footer.jsp"%>
