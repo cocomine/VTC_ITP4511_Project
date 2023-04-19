@@ -1,9 +1,9 @@
-<%@ page import="it.itp4511.ea.bean.UserBean" %>
 <%! String title = "View Order"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
+<jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
 <sidebar:menu>
@@ -19,7 +19,7 @@
             <li><a href="">Order</a></li>
             <li><span>View Order</span></li>
         </content:directory>
-        <content:profile username="abc"/>
+        <content:profile username="${user.username}"/>
     </content:header>
 
     <content:content>

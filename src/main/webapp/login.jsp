@@ -38,6 +38,7 @@
                     <h2>Sign In</h2>
                 </div>
 
+                <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
                 <alert:danger display="${!empty error_msg}">
                     ${error_msg}
                 </alert:danger>

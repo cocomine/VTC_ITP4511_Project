@@ -39,9 +39,12 @@
                     <p>Hello there, Sign up and Join with Us</p>
                 </div>
 
+                <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
                 <alert:danger display="${!empty error_msg}">
                     ${error_msg}
                 </alert:danger>
+
+                <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
                 <alert:success display="${!empty success_msg}">
                     ${success_msg}
                 </alert:success>
