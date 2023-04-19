@@ -1,5 +1,6 @@
 package it.itp4511.ea.servlet;
 
+import it.itp4511.ea.bean.UserBean;
 import it.itp4511.ea.db.dbConnect;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -35,7 +35,7 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // check if user is logged in
-        if(request.getSession().getAttribute("user") != null) {
+        if (request.getSession().getAttribute("user") != null) {
             response.sendRedirect("");
             return;
         }
@@ -48,7 +48,7 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-        if(conn == null) {
+        if (conn == null) {
             request.setAttribute("error_msg", "Database connection error");
             requestDispatcher.forward(request, response);
             return;
@@ -60,29 +60,23 @@ public class login extends HttpServlet {
         String password = request.getParameter("password");
 
         // check if all fields are filled
-        if(email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             request.setAttribute("error_msg", "Please fill all fields");
             requestDispatcher.forward(request, response);
             return;
         }
 
         // get user from db
-        try{
+        try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM User WHERE email = ?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 // check if password is correct
-                if(rs.getString("password").equals(DigestUtils.sha256Hex(password))) {
+                if (rs.getString("password").equals(DigestUtils.sha512Hex(password))) {
                     // login success
-                    JSONObject user = new JSONObject();
-                    user.put("id", rs.getInt("UUID"));
-                    user.put("username", rs.getString("username"));
-                    user.put("email", rs.getString("email"));
-                    user.put("phone", rs.getString("phone"));
-                    user.put("role", rs.getString("role"));
-
+                    UserBean user = new UserBean(rs.getString("UUID"), rs.getString("email"), rs.getString("username"), rs.getString("phone"), rs.getInt("role"));
                     request.getSession().setAttribute("user", user);
                     response.sendRedirect("");
                     return;
@@ -92,7 +86,7 @@ public class login extends HttpServlet {
             // login failed
             request.setAttribute("error_msg", "Incorrect password");
             requestDispatcher.forward(request, response);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
 
             request.setAttribute("error_msg", "Database connection error");

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="it.itp4511.ea.bean.UserBean" %><%--
   Created by IntelliJ IDEA.
   User: rogui
   Date: 18/4/2023
@@ -8,6 +8,9 @@
 <%
     if(session.getAttribute("user") == null){
         response.sendRedirect("login");
+        return;
+    }else{
+        UserBean user = (UserBean) session.getAttribute("user");
     }
 %>
 <html class="manager-view-item" lang="en">

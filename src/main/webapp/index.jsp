@@ -1,65 +1,28 @@
 <%! String title = "View Order"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp"%>
+<%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
+<%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
+<jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
+
 <!--Menu-->
-<div class="sidebar-menu">
-    <div class="sidebar-header">
-        <div class="logo">
-            <a href="">EPL</a>
-        </div>
-    </div>
-    <div class="main-menu">
-        <div class="menu-inner">
-            <nav>
-                <ul class="metismenu" id="menu">
-                    <li class="active">
-                        <a href="javascript:void(0)" aria-expanded="true"><span>Order</span></a>
-                        <ul class="collapse">
-                            <li class="active"><a href="">View Order</a></li>
-                            <li><a href="">Create Order</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
+<sidebar:menu>
+    <sidebar:parentItem name="Order" active="true">
+        <sidebar:item href="viewOrder" active="true">View Order</sidebar:item>
+        <sidebar:item href="createOrder">Create Order</sidebar:item>
+    </sidebar:parentItem>
+</sidebar:menu>
 
-<!--Header-->
-<div class="main-content">
-    <div class="header-area">
-        <div class="row align-items-center">
-            <!--Nav Button-->
-            <div class="col-md-6 col-sm-8 clearfix">
-                <div class="nav-btn pull-left">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <!--Directory-->
-                <h4 class="page-title pull-left">View Order</h4>
-                <ul class="breadcrumbs pull-left">
-                    <li><a href="">Order</a></li>
-                    <li><span>View Order</span></li>
-                </ul>
-            </div>
-            <!--User Profile-->
-            <div class="col-md-6 col-sm-4 clearfix">
-                <ul class="notification-area pull-right">
-                    <ul class="user-profile pull-right">
-                        <h4 class="user-name dropdown-toggle" data-bs-toggle="dropdown" id="username"><%-- name --%>
-                            <i class="fa fa-angle-down"></i></h4>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="logout" id="logout">Log Out</a>
-                        </div>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-    </div>
+<content:main>
+    <content:header>
+        <content:directory pageTitle="<%=title%>">
+            <li><a href="">Order</a></li>
+            <li><span>View Order</span></li>
+        </content:directory>
+        <content:profile username="${user.username}"/>
+    </content:header>
 
-    <!--Main-->
-    <div class="main-content-inner">
+    <content:content>
         <div class="row">
             <!--Order List Start-->
             <div class="col-12 mt-5">
@@ -91,8 +54,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </content:content>
+</content:main>
 
 <!-- show order item -->
 <div class="modal fade" id="order-item" tabindex="-1" aria-labelledby="Order Item" aria-hidden="true">
@@ -161,7 +124,8 @@
 </div>
 
 <!-- load this page script -->
-<script>
-    const load_script = ["./assets/js/page/view-order.js"];
-</script>
+<content:script>
+    <content:scriptPath path="./assets/js/page/view-order.js" />
+</content:script>
+
 <%@ include file="function/footer.jsp"%>
