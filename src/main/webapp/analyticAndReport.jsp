@@ -1,4 +1,4 @@
-<%! String title = "View Staff"; %>
+<%! String title = "Analytic / Report"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
@@ -7,22 +7,24 @@
 
 <!--Menu-->
 <sidebar:menu>
-    <sidebar:parentItem name="Order" active="true">
-        <sidebar:item href="viewOrder" active="true">View Order</sidebar:item>
+    <sidebar:parentItem name="Order">
+        <sidebar:item href="viewOrder">View Order</sidebar:item>
         <sidebar:item href="createOrder">Create Order</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management" active="true">
-        <sidebar:item href="viewCustomer.jsp" active="true">View Customer</sidebar:item>
-        <sidebar:item href="viewStaff.jsp" active="true">View Staff</sidebar:item>
+    <sidebar:parentItem name="Account Management">
+        <sidebar:item href="viewAccount.jsp">View Account</sidebar:item>
         <sidebar:item href="createAccount.jsp">Create Account</sidebar:item>
+    </sidebar:parentItem>
+    <sidebar:parentItem name="Operating Data" active="true">
+        <sidebar:item href="analyticAndReport.jsp" active="true">Analytic / Report</sidebar:item>
     </sidebar:parentItem>
 </sidebar:menu>
 
 <content:main>
     <content:header>
         <content:directory pageTitle="<%=title%>">
-            <li><a href="">Account Management</a></li>
-            <li><span>View Staff</span></li>
+            <li><a href="">Operating Data</a></li>
+            <li><span>Analytic / Report</span></li>
         </content:directory>
         <content:profile username="${user.username}"/>
     </content:header>
@@ -33,36 +35,25 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Staff List</h4>
+                        <h4 class="header-title">Order List</h4>
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
                                 <tr>
+                                    <th>Account ID</th>
+                                    <th>Username</th>
+                                    <th>Customer's Email</th>
+                                    <th>Customer's Phone</th>
                                     <th>Staff ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Position</th>
+                                    <th>Staff's Name</th>
+                                    <th>Order Date & Time</th>
+                                    <th>Delivery Address</th>
+                                    <th>Delivery Date</th>
+                                    <th>Total Price</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ada Chan</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>97684664</td>
-                                    <td>Admin</td>
-                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Una Lee</td>
-                                    <td>una@abc.com</td>
-                                    <td>97585721</td>
-                                    <td>Staff</td>
-                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -138,5 +129,10 @@
         </div>
     </div>
 </div>
+
+<!-- load this page script -->
+<content:script>
+    <content:scriptPath path="./assets/js/page/view-order.js" />
+</content:script>
 
 <%@ include file="function/footer.jsp"%>

@@ -11,10 +11,12 @@
         <sidebar:item href="viewOrder" active="true">View Order</sidebar:item>
         <sidebar:item href="createOrder">Create Order</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management" active="true">
-        <sidebar:item href="viewCustomer.jsp" active="true">View Customer</sidebar:item>
-        <sidebar:item href="viewStaff.jsp" active="true">View Staff</sidebar:item>
+    <sidebar:parentItem name="Account Management">
+        <sidebar:item href="viewAccount.jsp">View Account</sidebar:item>
         <sidebar:item href="createAccount.jsp">Create Account</sidebar:item>
+    </sidebar:parentItem>
+    <sidebar:parentItem name="Operating Data">
+        <sidebar:item href="analyticAndReport.jsp">Analytic / Report</sidebar:item>
     </sidebar:parentItem>
 </sidebar:menu>
 

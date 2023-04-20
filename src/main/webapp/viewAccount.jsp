@@ -1,4 +1,4 @@
-<%! String title = "View Customer"; %>
+<%! String title = "View Staff"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
@@ -7,14 +7,16 @@
 
 <!--Menu-->
 <sidebar:menu>
-    <sidebar:parentItem name="Order" active="true">
-        <sidebar:item href="viewOrder" active="true">View Order</sidebar:item>
+    <sidebar:parentItem name="Order">
+        <sidebar:item href="viewOrder">View Order</sidebar:item>
         <sidebar:item href="createOrder">Create Order</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management" active="true">
-        <sidebar:item href="viewCustomer.jsp" active="true">View Customer</sidebar:item>
-        <sidebar:item href="viewStaff.jsp" active="true">View Staff</sidebar:item>
+        <sidebar:item href="viewAccount.jsp" active="true">View Account</sidebar:item>
         <sidebar:item href="createAccount.jsp">Create Account</sidebar:item>
+    </sidebar:parentItem>
+    <sidebar:parentItem name="Operating Data">
+        <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
     </sidebar:parentItem>
 </sidebar:menu>
 
@@ -22,7 +24,7 @@
     <content:header>
         <content:directory pageTitle="<%=title%>">
             <li><a href="">Account Management</a></li>
-            <li><span>View Customer</span></li>
+            <li><span>View Staff</span></li>
         </content:directory>
         <content:profile username="${user.username}"/>
     </content:header>
@@ -33,32 +35,43 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Customer List</h4>
+                        <h4 class="header-title">Staff List</h4>
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
                                 <tr>
-                                    <th>Customer ID</th>
+                                    <th>Staff ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Details</th>
+                                    <th>Position</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>4</td>
-                                    <td>Brendon Cho</td>
-                                    <td>brendonCho123@gmail.com</td>
-                                    <td>97637612</td>
-                                    <td><i class="ti-layout"></i></td>
+                                    <td>1</td>
+                                    <td>Ada Chan</td>
+                                    <td>ccc@abc.com</td>
+                                    <td>97684664</td>
+                                    <td>Admin</td>
+                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
                                 </tr>
                                 <tr>
-                                    <td>5</td>
-                                    <td>Kai Au</td>
-                                    <td>kaiau1199@yahoo.com.hk</td>
-                                    <td>67634412</td>
-                                    <td><i class="ti-layout"></i></td>
+                                    <td>2</td>
+                                    <td>Una Lee</td>
+                                    <td>una@abc.com</td>
+                                    <td>97585721</td>
+                                    <td>Staff</td>
+                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Brendon Au</td>
+                                    <td>brendon@gmail.com</td>
+                                    <td>97556721</td>
+                                    <td>Customer</td>
+                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
                                 </tr>
                                 </tbody>
                             </table>
