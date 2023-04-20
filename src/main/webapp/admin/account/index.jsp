@@ -1,6 +1,6 @@
 <%! String title = "View Staff"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="function/head.jsp"%>
+<%@ include file="../../function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
@@ -12,8 +12,8 @@
         <sidebar:item href="createOrder">Create Order</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management" active="true">
-        <sidebar:item href="viewAccount.jsp" active="true">View Account</sidebar:item>
-        <sidebar:item href="createAccount.jsp">Create Account</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/admin/account" active="true">View Account</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
@@ -83,70 +83,4 @@
     </content:content>
 </content:main>
 
-<!-- show order item -->
-<div class="modal fade" id="order-item" tabindex="-1" aria-labelledby="Order Item" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Order Item</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="single-table">
-                    <div class="table-responsive">
-                        <table class="table table-striped text-center" id="orderItems">
-                            <thead class="text-uppercase">
-                            <tr>
-                                <th>Item ID</th>
-                                <th>Item Name</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit delivery informationEdit delivery information -->
-<div class="modal fade" id="edit-order" tabindex="-1" aria-labelledby="Order Item" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit delivery information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="editOrder" class="needs-validation" novalidate data-ss-orderid="000000">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="dAddress" class="col-form-label">Delivery Address
-                            <span style="color: red">*</span></label>
-                        <textarea class="form-control" id="dAddress" name="dAddress" required></textarea>
-                        <div class="invalid-feedback">
-                            Please fill in delivery address
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dDate" class="col-form-label">Delivery Date
-                            <span style="color: red">*</span></label>
-                        <input class="form-control" type="date" id="dDate" name="dDate" required>
-                        <div class="invalid-feedback">
-                            Please fill in delivery date
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <p class="mt-4"><span style="color: red">*</span> Required</p>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<%@ include file="function/footer.jsp"%>
+<%@ include file="../../function/footer.jsp"%>

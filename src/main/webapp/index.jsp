@@ -12,8 +12,8 @@
         <sidebar:item href="createOrder">Create Order</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management">
-        <sidebar:item href="viewAccount.jsp">View Account</sidebar:item>
-        <sidebar:item href="createAccount.jsp">Create Account</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic / Report</sidebar:item>
