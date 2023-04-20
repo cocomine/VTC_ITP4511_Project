@@ -5,15 +5,15 @@
          version="5.0">
     <context-param>
         <param-name>dbUrl</param-name>
-        <param-value>jdbc:mysql://localhost:3306/itp4511_EA</param-value>
+        <param-value>jdbc:mysql://192.168.0.3:3306/itp4511_EA</param-value>
     </context-param>
     <context-param>
         <param-name>dbUser</param-name>
-        <param-value>root</param-value>
+        <param-value>itp4511_EA</param-value>
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value></param-value>
+        <param-value>uZ7@.Qd80*</param-value>
     </context-param>
     <!--<security-constraint>
         <display-name>Restrict GET requests on JSP files</display-name>
