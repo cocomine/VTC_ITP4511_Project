@@ -9,6 +9,11 @@ import java.io.StringWriter;
 public class menu extends SimpleTagSupport {
 
     StringWriter sw = new StringWriter();
+    private String href;
+
+    public void setHref(String href) {
+        this.href = href;
+    }
 
     public void doTag() throws IOException, JspException {
         getJspBody().invoke(sw);
@@ -16,7 +21,7 @@ public class menu extends SimpleTagSupport {
                 "<div class=\"sidebar-menu\">\n" +
                 "    <div class=\"sidebar-header\">\n" +
                 "        <div class=\"logo\">\n" +
-                "            <a href=\"\">EPL</a>\n" +
+                "            <a href=\"" + href + "\">EPL</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "    <div class=\"main-menu\">\n" +

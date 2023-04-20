@@ -6,7 +6,7 @@
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
-<sidebar:menu>
+<sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Order" active="true">
         <sidebar:item href="viewOrder" active="true">View Order</sidebar:item>
         <sidebar:item href="createOrder">Create Order</sidebar:item>

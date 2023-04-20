@@ -6,7 +6,7 @@
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
-<sidebar:menu>
+<sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Order">
         <sidebar:item href="viewOrder">View Order</sidebar:item>
         <sidebar:item href="createOrder">Create Order</sidebar:item>
@@ -24,7 +24,7 @@
     <content:header>
         <content:directory pageTitle="<%=title%>">
             <li><a href="">Account Management</a></li>
-            <li><span>View Staff</span></li>
+            <li><span>View Account</span></li>
         </content:directory>
         <content:profile username="${user.username}"/>
     </content:header>
@@ -35,12 +35,12 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Staff List</h4>
+                        <h4 class="header-title">Account List</h4>
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
                                 <tr>
-                                    <th>Staff ID</th>
+                                    <th>Account ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>

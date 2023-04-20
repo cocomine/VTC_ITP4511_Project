@@ -6,7 +6,7 @@
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
-<sidebar:menu>
+<sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Order">
         <sidebar:item href="viewOrder">View Order</sidebar:item>
         <sidebar:item href="createOrder">Create Order</sidebar:item>
@@ -23,7 +23,7 @@
 <content:main>
     <content:header>
         <content:directory pageTitle="<%=title%>">
-            <li><a href="">Account Management</a></li>
+            <li><a href=".">Account Management</a></li>
             <li><span>Create Account</span></li>
         </content:directory>
         <content:profile username="${user.username}"/>
