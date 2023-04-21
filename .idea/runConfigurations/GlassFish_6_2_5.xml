@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="GlassFish 6.2.5" type="GlassfishConfiguration" factoryName="Local" activateToolWindowBeforeRun="false" APPLICATION_SERVER_NAME="GlassFish 6.2.5" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="$USER_HOME$/.jdks/corretto-17.0.6">
+  <configuration default="false" name="GlassFish 6.2.5" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.2.5" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="$USER_HOME$/.jdks/corretto-17.0.6">
     <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/EA-1.0-SNAPSHOT" />
     <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>

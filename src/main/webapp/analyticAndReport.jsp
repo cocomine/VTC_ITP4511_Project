@@ -1,4 +1,4 @@
-<%! String title = "View Order"; %>
+<%! String title = "Analytic / Report"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
@@ -6,25 +6,25 @@
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
-<sidebar:menu href="${pageContext.request.contextPath}">
-    <sidebar:parentItem name="Order" active="true">
-        <sidebar:item href="viewOrder" active="true">View Order</sidebar:item>
+<sidebar:menu>
+    <sidebar:parentItem name="Order">
+        <sidebar:item href="viewOrder">View Order</sidebar:item>
         <sidebar:item href="createOrder">Create Order</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management">
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
+        <sidebar:item href="viewAccount.jsp">View Account</sidebar:item>
+        <sidebar:item href="createAccount.jsp">Create Account</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Operating Data">
-        <sidebar:item href="analyticAndReport.jsp">Analytic / Report</sidebar:item>
+    <sidebar:parentItem name="Operating Data" active="true">
+        <sidebar:item href="analyticAndReport.jsp" active="true">Analytic / Report</sidebar:item>
     </sidebar:parentItem>
 </sidebar:menu>
 
 <content:main>
     <content:header>
         <content:directory pageTitle="<%=title%>">
-            <li><a href="">Order</a></li>
-            <li><span>View Order</span></li>
+            <li><a href="">Operating Data</a></li>
+            <li><span>Analytic / Report</span></li>
         </content:directory>
         <content:profile username="${user.username}"/>
     </content:header>
