@@ -30,6 +30,7 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/function.js"></script>
 <script>
     toastr.options = {
         "progressBar": true,

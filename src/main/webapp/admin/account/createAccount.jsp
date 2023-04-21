@@ -35,7 +35,7 @@
             <!--Order List Start-->
             <div class="col-12 mt-5">
                 <div class="card">
-                    <form method="post" action="">
+                    <form method="post" action="" novalidate class="needs-validation">
                         <div class="card-body">
                             <h4 class="header-title">Create Account</h4>
 
@@ -51,23 +51,28 @@
 
                             <div class="col-12 mb-2">
                                 <label for="username" class="form-label">Username</label>
-                                <input class="form-control" type="text" id="username" name="username" maxlength="20">
+                                <input class="form-control" type="text" id="username" name="username" maxlength="20" required>
+                                <div class="invalid-feedback">Please enter a username.</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="email" class="form-label">Email</label>
-                                <input class="form-control" type="email" id="email" name="email" maxlength="100">
+                                <input class="form-control" type="email" id="email" name="email" maxlength="100" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input class="form-control" type="tel" id="phone" name="phone" maxlength="8">
+                                <input class="form-control" type="tel" id="phone" name="phone" maxlength="8" required>
+                                <div class="invalid-feedback">Please enter a valid phone number.</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password">
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <div class="invalid-feedback">Required field</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="C_password" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="C_password" name="C_password">
+                                <input type="password" class="form-control" id="C_password" name="C_password" required>
+                                <div class="invalid-feedback">Required field</div>
                             </div>
 
                             <b class="text-muted d-block">Role:</b>

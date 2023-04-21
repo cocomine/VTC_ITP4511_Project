@@ -3,6 +3,8 @@
 <%@ include file="../../function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
@@ -36,6 +38,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Account List</h4>
+
+                        <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                        <alert:danger display="${!empty error_msg}">
+                            ${error_msg}
+                        </alert:danger>
+
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
@@ -49,30 +57,32 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ada Chan</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>97684664</td>
-                                    <td>Admin</td>
-                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Una Lee</td>
-                                    <td>una@abc.com</td>
-                                    <td>97585721</td>
-                                    <td>Staff</td>
-                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Brendon Au</td>
-                                    <td>brendon@gmail.com</td>
-                                    <td>97556721</td>
-                                    <td>Customer</td>
-                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
-                                </tr>
+
+                                <jsp:useBean id="accountList" scope="request" class="java.util.ArrayList"/>
+                                <c:forEach items="${accountList}" var="account">
+                                    <tr>
+                                        <td>${account.id}</td>
+                                        <td>${account.username}</td>
+                                        <td>${account.email}</td>
+                                        <td>${account.phone}</td>
+                                        <td>
+                                            <c:if test="${account.role == 0}">
+                                                Member
+                                            </c:if>
+                                            <c:if test="${account.role == 1}">
+                                                Staff
+                                            </c:if>
+                                            <c:if test="${account.role == 2}">
+                                                Senior Management
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <i class="ti-pencil" data-edit="${account.id}"></i>
+                                            <i class="ti-trash" style="color:red;" data-delete="${account.id}"></i>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
@@ -82,5 +92,68 @@
         </div>
     </content:content>
 </content:main>
+
+<div class="modal" tabindex="-1" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editForm" method="post" action="" novalidate class="needs-validation">
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="id">
+                    <div class="col-12 mb-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input class="form-control" type="text" id="username" name="username" maxlength="20" required>
+                        <div class="invalid-feedback">Please enter a username.</div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" type="email" id="email" name="email" maxlength="100" required>
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input class="form-control" type="tel" id="phone" name="phone" maxlength="8" required>
+                        <div class="invalid-feedback">Please enter a valid phone number.</div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="(Do not change please leave blank)">
+                        <div class="invalid-feedback">Required field</div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="C_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="C_password" name="C_password" disabled required>
+                        <div class="invalid-feedback">Required field</div>
+                    </div>
+
+                    <b class="text-muted d-block">Role:</b>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" checked id="rAdministrator" name="role" class="form-check-input" value="2">
+                        <label class="form-check-label" for="rAdministrator">Senior Management</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="rStaff" name="role" class="form-check-input" value="1">
+                        <label class="form-check-label" for="rStaff">Staff</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="rCustomer" name="role" class="form-check-input" value="0">
+                        <label class="form-check-label" for="rCustomer">Member</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<content:script>
+    <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/viewAccount.js"/>
+</content:script>
 
 <%@ include file="../../function/footer.jsp"%>
