@@ -42,10 +42,10 @@ public class register extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
         if(conn == null) {
             request.setAttribute("error_msg", "Database connection error");
-            requestDispatcher.forward(request, response);
+            dispatcher.forward(request, response);
         }
 
         /* start register */
@@ -57,30 +57,31 @@ public class register extends HttpServlet {
         String C_password = request.getParameter("C_password");
 
         // check if all fields are filled
-        if(username.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || C_password.isEmpty() ) {
+        if(username == null || username.isEmpty() || email == null || email.isEmpty() || phone == null || phone.isEmpty()
+                || password == null || password.isEmpty() || C_password == null || C_password.isEmpty() ) {
             request.setAttribute("error_msg", "Please fill in all the fields");
-            requestDispatcher.forward(request, response);
+            dispatcher.forward(request, response);
             return;
         }
 
         // check if password and confirm password are the same
         if(!password.equals(C_password)) {
             request.setAttribute("error_msg", "Password and confirm password are not the same");
-            requestDispatcher.forward(request, response);
+            dispatcher.forward(request, response);
             return;
         }
 
         // check if phone number is not valid
         if(!phone.matches("[0-9]{8}")) {
             request.setAttribute("error_msg", "Phone number is not valid");
-            requestDispatcher.forward(request, response);
+            dispatcher.forward(request, response);
             return;
         }
 
         // check if email is not valid
         if(!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}")) {
             request.setAttribute("error_msg", "Email is not valid");
-            requestDispatcher.forward(request, response);
+            dispatcher.forward(request, response);
             return;
         }
 
@@ -95,7 +96,7 @@ public class register extends HttpServlet {
             if(stmt.executeQuery().next()) {
                 // email is already taken
                 request.setAttribute("error_msg", "Email is already taken");
-                requestDispatcher.forward(request, response);
+                dispatcher.forward(request, response);
             }else{
                 // email is not taken, insert record
                 stmt = conn.prepareStatement("INSERT INTO User (username, email, phone, password, role) VALUES (?, ?, ?, ?, 0)");
@@ -106,13 +107,13 @@ public class register extends HttpServlet {
                 stmt.executeUpdate();
 
                 request.setAttribute("success_msg", "Registration successful, please login");
-                requestDispatcher.forward(request, response);
+                dispatcher.forward(request, response);
             }
         } catch (SQLException e) {
             e.printStackTrace();
 
             request.setAttribute("error_msg", "Database connection error");
-            requestDispatcher.forward(request, response);
+            dispatcher.forward(request, response);
         }
     }
 }

@@ -3,6 +3,7 @@
 <%@ include file="../../function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
@@ -37,39 +38,55 @@
                     <form method="post" action="">
                         <div class="card-body">
                             <h4 class="header-title">Create Account</h4>
-                            <div class="form-group">
-                                <label for="createUsername" class="col-form-label">Username</label>
-                                <input class="form-control" type="text" value="" id="createUsername">
+
+                            <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                            <alert:danger display="${!empty error_msg}">
+                                ${error_msg}
+                            </alert:danger>
+
+                            <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
+                            <alert:success display="${!empty success_msg}">
+                                ${success_msg}
+                            </alert:success>
+
+                            <div class="col-12 mb-2">
+                                <label for="username" class="form-label">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" maxlength="20">
                             </div>
-                            <div class="form-group">
-                                <label for="createEmail" class="col-form-label">Email</label>
-                                <input class="form-control" type="email" value="" id="createEmail">
+                            <div class="col-12 mb-2">
+                                <label for="email" class="form-label">Email</label>
+                                <input class="form-control" type="email" id="email" name="email" maxlength="100">
                             </div>
-                            <div class="form-group">
-                                <label for="createPhoneNo" class="col-form-label">Phone</label>
-                                <input class="form-control" type="tel" value="" id="createPhoneNo">
+                            <div class="col-12 mb-2">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input class="form-control" type="tel" id="phone" name="phone" maxlength="8">
                             </div>
-                            <div class="form-group">
-                                <label for="createPassword" class="">Password</label>
-                                <input type="password" class="form-control" id="createPassword" value="" placeholder="Password">
+                            <div class="col-12 mb-2">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                            </div>
+                            <div class="col-12 mb-2">
+                                <label for="C_password" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="C_password" name="C_password">
                             </div>
 
-                            <b class="text-muted mb-3 mt-4 d-block">Role:</b>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" checked id="rAdministrator" name="createRole" class="custom-control-input">
-                                <label class="custom-control-label" for="rAdministrator">Administrator</label>
+                            <b class="text-muted d-block">Role:</b>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" checked id="rAdministrator" name="role" class="form-check-input" value="2">
+                                <label class="form-check-label" for="rAdministrator">Senior Management</label>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="rStaff" name="createRole" class="custom-control-input">
-                                <label class="custom-control-label" for="rStaff">Staff</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="rStaff" name="role" class="form-check-input" value="1">
+                                <label class="form-check-label" for="rStaff">Staff</label>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="rCustomer" name="createRole" class="custom-control-input">
-                                <label class="custom-control-label" for="rCustomer">Customer</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="rCustomer" name="role" class="form-check-input" value="0">
+                                <label class="form-check-label" for="rCustomer">Member</label>
                             </div>
-                            <div align="right">
-                                <button type="submit" class="btn btn-primary btn-lg btn-rounded me-2">Submit</button>
-                                <button type="reset" class="btn btn-primary btn-lg btn-rounded me-2">Reset</button>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-rounded me-2">Submit</button>
+                                <button type="reset" class="btn btn-primary btn-rounded me-2">Reset</button>
                             </div>
                         </div>
                     </form>
