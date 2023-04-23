@@ -7,13 +7,16 @@
 
 <!--Menu-->
 <sidebar:menu>
-    <sidebar:parentItem name="Order">
-        <sidebar:item href="viewOrder">View Order</sidebar:item>
-        <sidebar:item href="createOrder">Create Order</sidebar:item>
+    <sidebar:parentItem name="Venue Booking">
+        <sidebar:item href="index.jsp">Book Venue</sidebar:item> <!--All user can see-->
+    </sidebar:parentItem>
+    <sidebar:parentItem name="Venue Management">
+        <sidebar:item href="viewVenue.jsp">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="createVenue.jsp">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management" active="true">
-        <sidebar:item href="viewAccount.jsp">View Account</sidebar:item>
-        <sidebar:item href="createAccount.jsp" active="true">Create Account</sidebar:item>
+        <sidebar:item href="viewAccount.jsp">View Account</sidebar:item> <!--Only Admin  can see-->
+        <sidebar:item href="createAccount.jsp" active="true">Create Account</sidebar:item> <!--Only Admin can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
@@ -31,7 +34,7 @@
 
     <content:content>
         <div class="row">
-            <!--Order List Start-->
+            <!--Create Account Form Start-->
             <div class="col-12 mt-5">
                 <div class="card">
                     <form method="post" action="">
@@ -78,71 +81,5 @@
         </div>
     </content:content>
 </content:main>
-
-<!-- show order item -->
-<div class="modal fade" id="order-item" tabindex="-1" aria-labelledby="Order Item" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Order Item</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="single-table">
-                    <div class="table-responsive">
-                        <table class="table table-striped text-center" id="orderItems">
-                            <thead class="text-uppercase">
-                            <tr>
-                                <th>Item ID</th>
-                                <th>Item Name</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit delivery informationEdit delivery information -->
-<div class="modal fade" id="edit-order" tabindex="-1" aria-labelledby="Order Item" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit delivery information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="editOrder" class="needs-validation" novalidate data-ss-orderid="000000">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="dAddress" class="col-form-label">Delivery Address
-                            <span style="color: red">*</span></label>
-                        <textarea class="form-control" id="dAddress" name="dAddress" required></textarea>
-                        <div class="invalid-feedback">
-                            Please fill in delivery address
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dDate" class="col-form-label">Delivery Date
-                            <span style="color: red">*</span></label>
-                        <input class="form-control" type="date" id="dDate" name="dDate" required>
-                        <div class="invalid-feedback">
-                            Please fill in delivery date
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <p class="mt-4"><span style="color: red">*</span> Required</p>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <%@ include file="function/footer.jsp"%>
