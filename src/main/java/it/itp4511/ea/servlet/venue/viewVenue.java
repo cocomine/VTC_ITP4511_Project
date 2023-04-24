@@ -90,10 +90,10 @@ public class viewVenue extends HttpServlet {
 
         /* Delete venue */
         if(type.equals("delete")) {
-            String id = json.getString("id");
+            int id = json.getInt("id");
             try {
                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM venue WHERE ID = ?");
-                stmt.setString(1, id);
+                stmt.setInt(1, id);
                 stmt.executeUpdate();
                 writer.println("{\"message\": \"Venue deleted\"}");
             } catch (SQLException e) {
