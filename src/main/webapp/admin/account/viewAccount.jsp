@@ -80,8 +80,8 @@
                                             </c:if>
                                         </td>
                                         <td>
-                                            <i class="ti-pencil" data-edit="${account.id}"></i>
-                                            <i class="ti-trash" style="color:red;" data-delete="${account.id}"></i>
+                                            <i class="ti-pencil me-2" data-edit="${account.id}"></i>
+                                            <i class="ti-trash text-danger" data-delete="${account.id}"></i>
                                         </td>
                                     </tr>
                                 </c:forEach>

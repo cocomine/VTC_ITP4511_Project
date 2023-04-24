@@ -3,6 +3,8 @@
 <%@ include file="../function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
@@ -33,12 +35,19 @@
     </content:header>
 
     <content:content>
+
         <div class="row">
             <!--Order List Start-->
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Venue List</h4>
+
+                        <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                        <alert:danger display="${!empty error_msg}">
+                            ${error_msg}
+                        </alert:danger>
+
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
@@ -54,16 +63,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ada Chan</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>97684664</td>
-                                    <td>Admin</td>
-                                    <td>Admin</td>
-                                    <td>Admin</td>
-                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
-                                </tr>
+
+                                <jsp:useBean id="venueList" scope="request" class="java.util.ArrayList"/>
+                                <c:forEach items="${venueList}" var="venue">
+                                    <tr>
+                                        <td><img src="${pageContext.request.contextPath}/upload/${venue.image}" alt="venue image" style="max-width: 200px; max-height: 200px"></td>
+                                        <td>${venue.id}</td>
+                                        <td>${venue.location}</td>
+                                        <td>${venue.name}</td>
+                                        <td>${venue.description}</td>
+                                        <td>${venue.max}</td>
+                                        <td>$ ${venue.fee}</td>
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}/venue/edit?id=${venue.id}"><i class="ti-pencil me-2"></i></a>
+                                            <i class="ti-trash text-danger" data-delete="${venue.id}"></i>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>

@@ -1,4 +1,4 @@
-<%! String title = "Create Venue"; %>
+<%! String title = "Edit Venue"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
@@ -12,8 +12,8 @@
         <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Venue Management" active="true">
-        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/create" active="true">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue" active="true">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management">
         <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
@@ -52,6 +52,7 @@
                                 ${success_msg}
                             </alert:success>
 
+                            <input name="id" type="hidden" value="">
                             <div class="col-12 mb-2">
                                 <label for="location" class="form-label">Location</label>
                                 <input class="form-control" type="text" id="location" name="location">

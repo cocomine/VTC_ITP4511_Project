@@ -3,6 +3,8 @@ package it.itp4511.ea.bean;
 import java.io.Serializable;
 
 public class VenueBean implements Serializable {
+
+    private String id;
     private String location;
     private String name;
     private String description;
@@ -13,13 +15,22 @@ public class VenueBean implements Serializable {
     public VenueBean() {
     }
 
-    public VenueBean(String location, String name, String description, int max, double fee, String image) {
+    public VenueBean(String id, String location, String name, String description, int max, double fee, String image) {
+        this.id = id;
         this.location = location;
         this.name = name;
         this.description = description;
         this.max = max;
         this.fee = fee;
         this.image = image;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getLocation() {
