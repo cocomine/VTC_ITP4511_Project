@@ -80,14 +80,14 @@ public class createVenue extends HttpServlet {
         }
 
         // check if max and fee are numbers
-        if (!max.matches("[0-9]+") || !fee.matches("[0-9]+")) {
+        if (!max.matches("[0-9]+") || !fee.matches("[0-9]+\\.[0-9]+")) {
             request.setAttribute("error_msg", "Max and fee must be numbers.");
             dispatcher.forward(request, response);
             return;
         }
 
         // check if max and fee are positive
-        if (Integer.parseInt(max) <= 0 || Integer.parseInt(fee) < 0) {
+        if (Integer.parseInt(max) <= 0 || Double.parseDouble(fee) < 0) {
             request.setAttribute("error_msg", "Max and fee must be positive.");
             dispatcher.forward(request, response);
             return;
@@ -123,7 +123,7 @@ public class createVenue extends HttpServlet {
             stmt.setString(2, name);
             stmt.setString(3, description);
             stmt.setInt(4, Integer.parseInt(max));
-            stmt.setInt(5, Integer.parseInt(fee));
+            stmt.setDouble(5, Double.parseDouble(fee));
             stmt.setString(6, file_name);
             stmt.executeUpdate();
 

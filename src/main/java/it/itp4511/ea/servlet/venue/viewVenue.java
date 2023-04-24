@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import static it.itp4511.ea.bean.VenueBean.getBean;
+
 @WebServlet(name = "viewVenue", value = {"/venue", "/venue/"})
 public class viewVenue extends HttpServlet {
     private Connection conn;
@@ -47,14 +49,7 @@ public class viewVenue extends HttpServlet {
 
             ArrayList<VenueBean> venues = new ArrayList<>();
             while(result.next()) {
-                VenueBean venue = new VenueBean();
-                venue.setId(result.getString("ID"));
-                venue.setName(result.getString("name"));
-                venue.setLocation(result.getString("location"));
-                venue.setDescription(result.getString("description"));
-                venue.setMax(result.getInt("max"));
-                venue.setFee(result.getDouble("fee"));
-                venue.setImage(result.getString("image"));
+                VenueBean venue = getBean(result);
                 venues.add(venue);
             }
 

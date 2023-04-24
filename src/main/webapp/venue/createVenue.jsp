@@ -54,30 +54,36 @@
 
                             <div class="col-12 mb-2">
                                 <label for="location" class="form-label">Location</label>
-                                <input class="form-control" type="text" id="location" name="location">
+                                <input class="form-control" type="text" id="location" name="location" required maxlength="100">
+                                <div class="invalid-feedback">Please enter a location.</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="name" class="form-label">Venue Name</label>
-                                <input class="form-control" type="text" id="name" name="name">
+                                <input class="form-control" type="text" id="name" name="name" required maxlength="50">
+                                <div class="invalid-feedback">Please enter a name.</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="description">Venue Description</label>
-                                <textarea class="form-control" placeholder="Leave a venue description here" id="description" name="description"></textarea>
+                                <textarea class="form-control" placeholder="Leave a venue description here" id="description" name="description" required maxlength="200"></textarea>
+                                <div class="invalid-feedback">Please enter a description.</div>
                             </div>
 
                             <div class="col-12 mb-2">
                                 <label for="max" class="form-label">Max Capacity</label>
-                                <input class="form-control" type="number" id="max" min="1" name="max">
+                                <input class="form-control" type="number" id="max" min="1" name="max" required>
+                                <div class="invalid-feedback">Please enter a valid number.</div>
                             </div>
 
                             <div class="col-12 mb-2">
                                 <label for="fee" class="form-label">Booking Fee</label>
-                                <input class="form-control" type="number" id="fee" name="fee" min="0" step="0.01">
+                                <input class="form-control" type="number" id="fee" name="fee" min="0" step="0.01" required>
+                                <div class="invalid-feedback">Please enter a valid fee.</div>
                             </div>
 
                             <div class="col-12 mb-2">
                                 <label for="image" class="form-label">Venue Image(Only 1 pic)</label>
-                                <input class="form-control" type="file" name="image" id="image" accept="image/png, image/jpeg, image/webp">
+                                <input class="form-control" type="file" name="image" id="image" accept="image/png, image/jpeg, image/webp" required>
+                                <div class="invalid-feedback">Please select a valid image.</div>
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-rounded me-2">Submit</button>
