@@ -43,9 +43,9 @@ public class viewAccount extends HttpServlet {
             return;
         }
 
-        PreparedStatement stmt = null;
+        // get all accounts
         try {
-            stmt = conn.prepareStatement("SELECT * FROM User");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");
             ResultSet result = stmt.executeQuery();
 
             ArrayList<UserBean> users = new ArrayList<>();

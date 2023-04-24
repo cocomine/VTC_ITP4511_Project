@@ -8,9 +8,12 @@
 
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
-    <sidebar:parentItem name="Order">
-        <sidebar:item href="viewOrder">View Order</sidebar:item>
-        <sidebar:item href="createOrder">Create Order</sidebar:item>
+    <sidebar:parentItem name="Venue Booking">
+        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
+    </sidebar:parentItem>
+    <sidebar:parentItem name="Venue Management">
+        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management" active="true">
         <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
@@ -91,7 +94,7 @@
 
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-rounded me-2">Submit</button>
-                                <button type="reset" class="btn btn-primary btn-rounded me-2">Reset</button>
+                                <button type="reset" class="btn btn-secondary btn-rounded me-2">Reset</button>
                             </div>
                         </div>
                     </form>

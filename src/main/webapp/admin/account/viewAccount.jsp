@@ -9,9 +9,12 @@
 
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
-    <sidebar:parentItem name="Order">
-        <sidebar:item href="viewOrder">View Order</sidebar:item>
-        <sidebar:item href="createOrder">Create Order</sidebar:item>
+    <sidebar:parentItem name="Venue Booking">
+        <sidebar:item href="${pageContext.request.contextPath}" active="true">Book Venue</sidebar:item> <!--All user can see-->
+    </sidebar:parentItem>
+    <sidebar:parentItem name="Venue Management">
+        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management" active="true">
         <sidebar:item href="${pageContext.request.contextPath}/admin/account" active="true">View Account</sidebar:item>
@@ -77,8 +80,8 @@
                                             </c:if>
                                         </td>
                                         <td>
-                                            <i class="ti-pencil" data-edit="${account.id}"></i>
-                                            <i class="ti-trash" style="color:red;" data-delete="${account.id}"></i>
+                                            <i class="ti-pencil me-2" data-edit="${account.id}"></i>
+                                            <i class="ti-trash text-danger" data-delete="${account.id}"></i>
                                         </td>
                                     </tr>
                                 </c:forEach>
