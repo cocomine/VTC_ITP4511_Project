@@ -3,6 +3,7 @@
 <%@ include file="../function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
@@ -37,42 +38,50 @@
             <!--Create Account Form Start-->
             <div class="col-12 mt-5">
                 <div class="card">
-                    <form method="post" action="">
+                    <form method="post" action="" novalidate class="needs-validation" enctype="multipart/form-data">
                         <div class="card-body">
                             <h4 class="header-title">Create Venue</h4>
 
-                            <div class="form-group">
-                                <label for="createVenueLocation" class="col-form-label">Location</label>
-                                <input class="form-control" type="text" value="" id="createVenueLocation">
-                            </div>
-                            <div class="form-group">
-                                <label for="createVenueName" class="col-form-label">Venue Name</label>
-                                <input class="form-control" type="text" value="" id="createVenueName">
-                            </div></br>
+                            <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                            <alert:danger display="${!empty error_msg}">
+                                ${error_msg}
+                            </alert:danger>
 
-                            <div class="form-group">
-                                <label for="createVenueDescription">Venue Description</label>
-                                <textarea class="form-control" placeholder="Leave a venue description here" id="createVenueDescription"></textarea>
-                            </div>
+                            <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
+                            <alert:success display="${!empty success_msg}">
+                                ${success_msg}
+                            </alert:success>
 
-                            <div class="form-group">
-                                <label for="createVenueCapacity" class="col-form-label">Max Capacity</label>
-                                <input class="form-control" type="number" value="" id="createVenueCapacity" min="1">
+                            <div class="col-12 mb-2">
+                                <label for="location" class="form-label">Location</label>
+                                <input class="form-control" type="text" id="location" name="location">
                             </div>
-
-                            <div class="form-group">
-                                <label for="createVenueBookingFee" class="col-form-label">Booking Fee</label>
-                                <input class="form-control" type="text" value="" id="createVenueBookingFee">
+                            <div class="col-12 mb-2">
+                                <label for="name" class="form-label">Venue Name</label>
+                                <input class="form-control" type="text" id="name" name="name">
                             </div>
-
-                            <div class="form-group">
-                                <label for="createVenueImage" class="col-form-label">Venue Image(Only 1 pic)</label>
-                                <input class="form-control" type="file" value="" name="createVenueImage" id="createVenueImage">
+                            <div class="col-12 mb-2">
+                                <label for="description">Venue Description</label>
+                                <textarea class="form-control" placeholder="Leave a venue description here" id="description" name="description"></textarea>
                             </div>
 
-                            <div align="right">
-                                <button type="submit" class="btn btn-primary btn-lg btn-rounded me-2">Submit</button>
-                                <button type="reset" class="btn btn-primary btn-lg btn-rounded me-2">Reset</button>
+                            <div class="col-12 mb-2">
+                                <label for="max" class="form-label">Max Capacity</label>
+                                <input class="form-control" type="number" id="max" min="1" name="max">
+                            </div>
+
+                            <div class="col-12 mb-2">
+                                <label for="fee" class="form-label">Booking Fee</label>
+                                <input class="form-control" type="number" id="fee" name="fee" min="0" step="0.01">
+                            </div>
+
+                            <div class="col-12 mb-2">
+                                <label for="image" class="form-label">Venue Image(Only 1 pic)</label>
+                                <input class="form-control" type="file" name="image" id="image" accept="image/png, image/jpeg, image/webp">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-rounded me-2">Submit</button>
+                                <button type="reset" class="btn btn-secondary btn-rounded me-2">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -81,5 +90,9 @@
         </div>
     </content:content>
 </content:main>
+
+<content:script>
+
+</content:script>
 
 <%@ include file="../function/footer.jsp"%>

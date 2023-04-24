@@ -94,7 +94,7 @@
 
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-rounded me-2">Submit</button>
-                                <button type="reset" class="btn btn-primary btn-rounded me-2">Reset</button>
+                                <button type="reset" class="btn btn-secondary btn-rounded me-2">Reset</button>
                             </div>
                         </div>
                     </form>

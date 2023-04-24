@@ -12,12 +12,12 @@
     <sidebar:parentItem name="Venue Booking">
         <sidebar:item href="${pageContext.request.contextPath}" active="true">Book Venue</sidebar:item> <!--All user can see-->
     </sidebar:parentItem>
-    <sidebar:parentItem name="Venue Management" active="true">
-        <sidebar:item href="${pageContext.request.contextPath}/venue" active="true">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
+    <sidebar:parentItem name="Venue Management">
+        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
         <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management">
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
+    <sidebar:parentItem name="Account Management" active="true">
+        <sidebar:item href="${pageContext.request.contextPath}/admin/account" active="true">View Account</sidebar:item>
         <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Operating Data">
