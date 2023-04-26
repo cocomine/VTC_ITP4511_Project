@@ -13,6 +13,7 @@
     <sidebar:parentItem name="Venue Management" active="true">
         <sidebar:item href="viewVenue.jsp" active="true">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
         <sidebar:item href="createVenue.jsp">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="viewBooking.jsp">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management">
         <sidebar:item href="viewAccount.jsp">View Account</sidebar:item> <!--Only Admin  can see-->
@@ -51,6 +52,7 @@
                                     <th>Max Capacity</th>
                                     <th>Booking Fee</th>
                                     <th>Action</th>
+                                    <th>Enable</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -63,6 +65,11 @@
                                     <td>Admin</td>
                                     <td>Admin</td>
                                     <td><i class="ti-pencil"></i><i class="ti-trash" style="color:red;"></i></td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="enableSwitch1" checked>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>

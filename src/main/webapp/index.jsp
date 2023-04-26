@@ -13,6 +13,7 @@
     <sidebar:parentItem name="Venue Management">
         <sidebar:item href="viewVenue.jsp">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
         <sidebar:item href="createVenue.jsp">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="viewBooking.jsp">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management">
         <sidebar:item href="viewAccount.jsp">View Account</sidebar:item> <!--Only Admin  can see-->
@@ -176,6 +177,7 @@
                     </form>
                 </div>
             </div>
+
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
