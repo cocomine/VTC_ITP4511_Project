@@ -1,6 +1,8 @@
 package it.itp4511.ea.bean;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserBean implements Serializable {
     private String email;
@@ -10,6 +12,16 @@ public class UserBean implements Serializable {
     private String phone;
 
     public UserBean() {
+    }
+
+    public static UserBean getBean(ResultSet result) throws SQLException {
+        UserBean user = new UserBean();
+        user.setEmail(result.getString("email"));
+        user.setId(result.getString("UUID"));
+        user.setUsername(result.getString("username"));
+        user.setRole(result.getInt("role"));
+        user.setPhone(result.getString("phone"));
+        return user;
     }
 
     public UserBean(String id, String email, String username, String phone, int role) {

@@ -76,6 +76,7 @@ public class viewVenue extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         if(conn == null) {
+            response.setStatus(500);
             writer.println("{\"message\": \"Database connection error\"}");
             return;
         }

@@ -169,8 +169,8 @@
                 <div class="modal-body">
                     <div class="row" id="guestList"></div>
                     <div class="w-100">
-                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">Add new
-                            guest
+                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">
+                            Add new guest
                         </button>
                     </div>
                 </div>

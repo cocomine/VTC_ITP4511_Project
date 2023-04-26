@@ -3,7 +3,9 @@
 <%@ include file="../function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
@@ -48,86 +50,69 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Booking List</h4>
+
+                        <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                        <alert:danger display="${!empty error_msg}">
+                            ${error_msg}
+                        </alert:danger>
+
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
                                 <tr>
                                     <th>Booking ID</th>
-                                    <th>Member's Name</th>
-                                    <th>Member's Email</th>
+                                    <th>Member Name</th>
+                                    <th>Member Email</th>
+                                    <th>Venue Name</th>
+                                    <th>Book Date</th>
                                     <th>Approval</th>
                                     <th>Check-in/Check-out</th>
+                                    <th>Guest list</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Oscar</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="approval-approval-1" checked autocomplete="off">
-                                        <label class="btn btn-success" for="approval-approval-1">Approval</label>
-                                        <input type="checkbox" class="btn-check" id="approval-reject-1" checked autocomplete="off">
-                                        <label class="btn btn-danger" for="approval-reject-1">Reject</label>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="check-in-1" checked autocomplete="off" disabled>
-                                        <label class="btn btn-warning" for="check-in-1">Check-in</label>
-                                        <input type="checkbox" class="btn-check" id="check-out-1" checked autocomplete="off" disabled>
-                                        <label class="btn btn-info" for="check-out-1">Check-out</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Kitty</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="approval-approval-2" checked autocomplete="off" disabled>
-                                        <label class="btn btn-success" for="approval-approval-2">Approval</label>
-                                        <input type="checkbox" class="btn-check" id="approval-reject-2" checked autocomplete="on">
-                                        <label class="btn btn-danger" for="approval-reject-2">Reject</label>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="check-in-2" checked autocomplete="off" disabled>
-                                        <label class="btn btn-warning" for="check-in-2">Check-in</label>
-                                        <input type="checkbox" class="btn-check" id="check-out-2" checked autocomplete="off" disabled>
-                                        <label class="btn btn-info" for="check-out-2">Check-out</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Peter</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="approval-approval-3" checked autocomplete="on">
-                                        <label class="btn btn-success" for="approval-approval-3">Approval</label>
-                                        <input type="checkbox" class="btn-check" id="approval-reject-3" checked autocomplete="off" disabled>
-                                        <label class="btn btn-danger" for="approval-reject-3">Reject</label>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="check-in-3" checked autocomplete="on" disabled>
-                                        <label class="btn btn-warning" for="check-in-3">Check-in</label>
-                                        <input type="checkbox" class="btn-check" id="check-out-3" checked autocomplete="off">
-                                        <label class="btn btn-info" for="check-out-3">Check-out</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Sanny</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="approval-approval-4" checked autocomplete="off" disabled>
-                                        <label class="btn btn-success" for="approval-approval-4">Approval</label>
-                                        <input type="checkbox" class="btn-check" id="approval-reject-4" checked autocomplete="on">
-                                        <label class="btn btn-danger" for="approval-reject-4">Reject</label>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="btn-check" id="check-in-4" checked autocomplete="off" disabled>
-                                        <label class="btn btn-warning" for="check-in-4">Check-in</label>
-                                        <input type="checkbox" class="btn-check" id="check-out-4" checked autocomplete="off" disabled>
-                                        <label class="btn btn-info" for="check-out-4">Check-out</label>
-                                    </td>
-                                </tr>
+
+                                <fmt:setLocale value="es_US"/>
+                                <jsp:useBean id="bookingList" scope="request" class="java.util.ArrayList"/>
+                                <c:forEach items="${bookingList}" var="booking">
+                                    <tr>
+                                        <td>${booking.id}</td>
+                                        <td>${booking.userBean.username}</td>
+                                        <td>${booking.userBean.email}</td>
+                                        <td>${booking.venueBean.name}</td>
+                                        <td><fmt:formatDate value="${booking.book_date}" type="both" dateStyle="short" timeStyle="short"/></td>
+                                        <td>
+                                            <button class="btn btn-success btn-rounded btn-sm" data-approve="${booking.id}"
+                                                    <c:if test="${booking.status == 2}">disabled</c:if> >
+                                                Approve
+                                            </button>
+                                            <button class="btn btn-danger btn-rounded btn-sm" data-reject="${booking.id}"
+                                                    <c:if test="${booking.status == 1}">disabled</c:if> >
+                                                Reject
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-rounded btn-sm" data-checkin="${booking.id}"
+                                                    <c:if test="${booking.check_in != null || booking.status != 1}">disabled</c:if> >
+                                                Check-in
+                                            </button>
+                                            <button class="btn btn-outline-primary btn-rounded btn-sm"
+                                                    data-checkout="${booking.id}"
+                                                    <c:if test="${booking.check_out != null || booking.status != 1}">disabled</c:if> >
+                                                Check-out
+                                            </button>
+                                            <br>
+                                            <c:if test="${booking.check_in != null}">
+                                                <p>Check-in: <fmt:formatDate value="${booking.check_in}" type="time" timeStyle="short"/></p>
+                                            </c:if>
+                                            <c:if test="${booking.check_out != null}">
+                                                <p>Check-out: <fmt:formatDate value="${booking.check_out}" type="time" timeStyle="short"/></p>
+                                            </c:if>
+                                        </td>
+                                        <td><i class="fa fa-eye" style="cursor: pointer" data-guestlist="${booking.id}"></i></td>
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
@@ -137,5 +122,37 @@
         </div>
     </content:content>
 </content:main>
+
+<div class="modal fade" id="guestList"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Guest List</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Guest Name</th>
+                        <th scope="col">Guest Email</th>
+                    </tr>
+                    </thead>
+                    <tbody id="guestListBody">
+                    </tbody>
+                </table>
+                <hr>
+                <div class="col-12">
+                    <label for="template" class="form-label">Notification template for guest invitations</label>
+                    <textarea class="form-control" id="template" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<content:script>
+    <content:scriptPath path="/assets/js/page/viewBooking.js"/>
+</content:script>
 
 <%@ include file="../function/footer.jsp" %>
