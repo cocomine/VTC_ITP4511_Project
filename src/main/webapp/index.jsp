@@ -124,9 +124,67 @@
                             <div class="form-group">
                                 <label for="venueBookingFee" class="col-form-label">Booking Fee</label>
                                 <input class="form-control" type="text" value="" id="venueBookingFee" disabled>
+                            </div></br>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary btn-lg btn-rounded me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Guest</button>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Guest</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="guestName" class="col-form-label">Guest's Name:</label>
+                                                        <input type="text" class="form-control" id="guestName" value="">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="guestEmail" class="col-form-label">Guest's Email:</label>
+                                                        <input class="form-control" type="email" value="" id="guestEmail">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" id="addGuest">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></br>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <form method="" action="">
+                                        <h4 class="header-title">Guest List</h4>
+                                        <div class="data-tables datatable-dark">
+                                            <table id="dataTable2" class="text-center">
+                                                <thead class="text-capitalize">
+                                                <tr>
+                                                    <th>Guest's Name</th>
+                                                    <th>Guest's Email</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Ada Chan</td>
+                                                    <td>ccc@abc.com</td>
+                                                    <td><i class="ti-close" style="color:red;"></i></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+
                             <div align="left">
-                                <button type="submit" class="btn btn-primary btn-lg btn-rounded me-2">Add to Booking List</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-rounded me-2" id="addToBookingList">Add to Booking List</button>
                                 <button type="reset" class="btn btn-primary btn-lg btn-rounded me-2">Reset</button>
                             </div>
                         </div>
@@ -139,7 +197,7 @@
                         <form method="" action="">
                             <h4 class="header-title">Your Booking List</h4>
                             <div class="data-tables datatable-dark">
-                                <table id="dataTable2" class="text-center">
+                                <table id="dataTable3" class="text-center">
                                     <thead class="text-capitalize">
                                     <tr>
                                         <th>Event Name</th>
