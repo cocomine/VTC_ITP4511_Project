@@ -135,7 +135,7 @@ public class index extends HttpServlet {
             }
         }
 
-        writer.println("{\"message\": \"success\"}");
+        writer.println("{\"message\": \"Booking " + array.length() + " venue success\"}");
     }
 
     public void destroy() {
