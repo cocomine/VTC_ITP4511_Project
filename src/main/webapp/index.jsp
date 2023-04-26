@@ -105,7 +105,9 @@
                             <div class="col-12 mb-2">
                                 <label for="date" class="form-label">Booking Date</label>
                                 <input class="form-control" type="datetime-local" id="date" name="date" required>
-                                <div class="invalid-feedback">Please provide a valid booking date.</div>
+                                <div class="invalid-feedback">
+                                    Please provide a valid booking date.
+                                </div>
                             </div>
 
                             <div class="col-12 mb-2">
@@ -155,9 +157,29 @@
             </div>
             <form id="guestListForm" novalidate class="needs-validation">
                 <div class="modal-body">
-                    <div class="row" id="guestList"></div>
+                    <div class="row" id="guestList">
+                        <div class="col-12 mb-2">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" id="guest" name="name" required placeholder="Name">
+                                        <label for="guest">Name</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" id="email" name="email" required placeholder="Email">
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn-close"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="w-100">
-                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">Add new guest</button>
+                        <button type="button" class="btn btn-outline-primary btn-rounded" id="addGuest">Add new guest</button>
                     </div>
                 </div>
                 <div class="modal-footer">

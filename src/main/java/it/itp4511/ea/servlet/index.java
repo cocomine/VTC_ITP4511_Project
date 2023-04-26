@@ -1,5 +1,6 @@
 package it.itp4511.ea.servlet;
 
+import it.itp4511.ea.bean.UserBean;
 import it.itp4511.ea.bean.VenueBean;
 import it.itp4511.ea.db.dbConnect;
 import jakarta.servlet.RequestDispatcher;
@@ -107,7 +108,28 @@ public class index extends HttpServlet {
             return;
         }
 
-        //insert into database
+        // get current user
+        UserBean user = (UserBean) request.getAttribute("user");
+        String uuid = user.getId();
+
+        //insert into database - booking
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Booking (book_date, template, user) VALUES (?, ?, ?)");
+            stmt.setString(1, date);
+            stmt.setString(2, template);
+            stmt.setString(3, uuid);
+            stmt.executeUpdate();
+
+            /*resp.setStatus(200);
+            writer.println("{\"message\": \"Success\"}");*/
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            resp.setStatus(500);
+            writer.println("{\"message\": \"Database connection error\"}");
+        }
+
+        //insert into database - booking_venue
 
     }
 
