@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{bootstrap, jquery-3.6.0, toastr}" />
+    <file url="PROJECT" libraries="{bootstrap, dataTables.bootstrap5, dataTables.jqueryui, dataTables.responsive, jquery-3.6.0, toastr}" />
   </component>
 </project>

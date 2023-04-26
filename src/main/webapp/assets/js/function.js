@@ -24,11 +24,21 @@ $(document).ready(function(){
     })
 })
 
-//turn to json
-function objectifyForm(formArray) {
-    let returnArray = {};
-    for (let i = 0; i < formArray.length; i++){
-        returnArray[formArray[i]['name']] = formArray[i]['value'];
-    }
-    return returnArray;
-}
+//turn to object
+/* 表單轉 JSON */
+$.fn.serializeObject = function() {
+    let o = {};
+    let a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value.trim() || null);
+        } else {
+
+            o[this.name] = this.value.trim() || null;
+        }
+    });
+    return o;
+};

@@ -3,7 +3,7 @@ const table = $("#dataTable").DataTable();
 const modal = $('#editModal')
 
 // Get data from server
-$('[data-edit]').click(function () {
+$('#dataTable').on('click', '[data-edit]', function () {
     const id = $(this).data('edit');
     fetch(location.pathname, {
         method: 'POST',
@@ -36,7 +36,7 @@ $('#editForm').submit(function (e) {
     e.preventDefault();
     e.stopPropagation();
 
-    const data = objectifyForm($(this).serializeArray());
+    const data = $(this).serializeObject();
     fetch(location.pathname, {
         method: 'POST',
         body: JSON.stringify({type: 'edit', ...data}),
@@ -47,6 +47,7 @@ $('#editForm').submit(function (e) {
         if(res.ok){
             toastr.success(json.message);
             bootstrap.Modal.getOrCreateInstance(modal[0]).hide();
+            $(this).removeClass('was-validated');
 
             let row = table.row(function(idx, value, node){
                 return value[0] === data.id.toString();
@@ -56,7 +57,7 @@ $('#editForm').submit(function (e) {
             rowData[1] = data.username;
             rowData[2] = data.email;
             rowData[3] = data.phone;
-            rowData[4] = data.role === 0 ? 'row.data(rowData).draw();' : data.role === 1 ? 'Staff' : 'Senior Management';
+            rowData[4] = data.role === '0' ? 'Member' : data.role === '1' ? 'Staff' : 'Senior Management';
             row.data(rowData).draw();
 
         }else {

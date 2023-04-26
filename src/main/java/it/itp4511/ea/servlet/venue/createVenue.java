@@ -82,7 +82,7 @@ public class createVenue extends HttpServlet {
         }
 
         // check if max and fee are numbers
-        if (!max.matches("[0-9]+") || !fee.matches("[0-9]+\\.[0-9]+")) {
+        if (!max.matches("[0-9]+") || !fee.matches("[0-9]+(\\.[0-9]+)?")) {
             request.setAttribute("error_msg", "Max and fee must be numbers.");
             dispatcher.forward(request, response);
             return;
@@ -119,7 +119,7 @@ public class createVenue extends HttpServlet {
         }
 
         /* Get current user ID */
-        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        UserBean user = (UserBean) request.getAttribute("user");
         charge = user.getId();
 
         // insert into database

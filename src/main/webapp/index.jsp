@@ -55,7 +55,7 @@
                                     <th>Description</th>
                                     <th>Max Capacity</th>
                                     <th>Booking Fee</th>
-                                    <th>Add to list</th>
+                                    <th>Add select</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -88,7 +88,7 @@
             <!--Book Venue Form Start-->
             <div class="col-6 mt-5">
                 <div class="card">
-                    <form method="post" action="">
+                    <form novalidate class="needs-validation" id="bookForm">
                         <div class="card-body">
                             <h4 class="header-title">Book Venue</h4>
 
@@ -104,11 +104,13 @@
 
                             <div class="col-12 mb-2">
                                 <label for="date" class="form-label">Booking Date</label>
-                                <input class="form-control" type="datetime-local" id="date" name="date">
+                                <input class="form-control" type="datetime-local" id="date" name="date" required>
+                                <div class="invalid-feedback">Please provide a valid booking date.</div>
                             </div>
 
                             <div class="col-12 mb-2">
-                                <label for="template" class="form-label">Notification template for guest invitations</label>
+                                <label for="template" class="form-label">Notification template for guest
+                                    invitations</label>
                                 <textarea class="form-control" id="template" name="template"></textarea>
                             </div>
 
@@ -125,13 +127,14 @@
                     <div class="card-body">
                         <h4 class="header-title">Select Venue</h4>
 
-                        <table class="table-primary">
-                            <thead>
-                                <tr>
-                                    <th>Venue ID</th>
-                                    <th>Name</th>
-                                    <th>Edit guest</th>
-                                </tr>
+                        <table class="table w-100" id="selectVenue">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Venue ID</th>
+                                <th>Name</th>
+                                <th>Edit guest</th>
+                                <th>Remove select</th>
+                            </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -142,6 +145,29 @@
         </div>
     </content:content>
 </content:main>
+
+<div class="modal fade" tabindex="-1" id="editGuest" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Guest list</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="guestListForm" novalidate class="needs-validation">
+                <div class="modal-body">
+                    <div class="row" id="guestList"></div>
+                    <div class="w-100">
+                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">Add new guest</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-rounded">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- load this page script -->
 <content:script>
