@@ -1,6 +1,6 @@
 <%! String title = "View Booking"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="function/head.jsp"%>
+<%@ include file="../function/head.jsp"%>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
@@ -8,16 +8,16 @@
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Venue Booking">
-        <sidebar:item href="index.jsp">Book Venue</sidebar:item> <!--All user can see-->
+        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Venue Management" active="true">
-        <sidebar:item href="viewVenue.jsp">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="createVenue.jsp">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="viewBooking.jsp" active="true">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/booking" active="true">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management">
-        <sidebar:item href="viewAccount.jsp">View Account</sidebar:item> <!--Only Admin  can see-->
-        <sidebar:item href="createAccount.jsp">Create Account</sidebar:item> <!--Only Admin can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
@@ -182,4 +182,4 @@
     </content:content>
 </content:main>
 
-<%@ include file="function/footer.jsp"%>
+<%@ include file="../function/footer.jsp"%>
