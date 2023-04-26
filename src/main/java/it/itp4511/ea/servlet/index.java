@@ -74,7 +74,7 @@ public class index extends HttpServlet {
         resp.setContentType("text/json");
         PrintWriter writer = resp.getWriter();
         String requestData = request.getReader().lines().collect(Collectors.joining());
-        JSONObject json = new JSONObject(requestData);
+        JSONArray array = new JSONArray(requestData);
 
         if(conn == null) {
             resp.setStatus(500);
@@ -83,54 +83,59 @@ public class index extends HttpServlet {
         }
 
         //check parameter
-        if(!(json.has("date") && json.has("template") && json.has("venue"))) {
+        if(array.isEmpty()) {
             resp.setStatus(400);
             writer.println("{\"message\": \"Missing parameter\"}");
             return;
         }
 
-        //get parameter
-        String date = json.getString("date");
-        String template = json.getString("template");
-        JSONArray venue = json.getJSONArray("venue");
-
-        //check parameter
-        if(date.isEmpty() || venue.isEmpty()) {
-            resp.setStatus(400);
-            writer.println("{\"message\": \"Please fill in all the fields\"}");
-            return;
-        }
-
-        //check datetime format
-        if(!date.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}")) {
-            resp.setStatus(400);
-            writer.println("{\"message\": \"Invalid datetime format\"}");
-            return;
-        }
-
-        // get current user
+        //get current user
         UserBean user = (UserBean) request.getAttribute("user");
-        String uuid = user.getId();
 
-        //insert into database - booking
-        try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Booking (book_date, template, user) VALUES (?, ?, ?)");
-            stmt.setString(1, date);
-            stmt.setString(2, template);
-            stmt.setString(3, uuid);
-            stmt.executeUpdate();
+        for(Object obj : array){
+            JSONObject json = (JSONObject) obj;
 
-            /*resp.setStatus(200);
-            writer.println("{\"message\": \"Success\"}");*/
-        } catch (SQLException e) {
-            e.printStackTrace();
+            //check parameter
+            if(!(json.has("detail") && json.has("guest") && json.has("venue") && json.getJSONObject("detail").has("date"))){
+                resp.setStatus(400);
+                writer.println("{\"message\": \"Missing parameter\"}");
+                return;
+            }
 
-            resp.setStatus(500);
-            writer.println("{\"message\": \"Database connection error\"}");
+            // get parameter
+            String date = json.getJSONObject("detail").getString("date");
+            int venue = json.getJSONArray("venue").getInt(1);
+            JSONArray guest = json.getJSONArray("guest");
+            String template = null;
+            if(!json.getJSONObject("detail").isNull("template")){
+                template = json.getJSONObject("detail").getString("template");
+            }
+
+            // check empty
+            if(date.isEmpty()){
+                resp.setStatus(400);
+                writer.println("{\"message\": \"Missing parameter\"}");
+                return;
+            }
+
+            // insert into database
+            try {
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO Booking (user, book_date, venue, template, guest) VALUES (?, ?, ?, ?, ?)");
+                stmt.setString(1, user.getId());
+                stmt.setString(2, date);
+                stmt.setInt(3, venue);
+                stmt.setString(4, template);
+                stmt.setString(5, guest.toString());
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                resp.setStatus(500);
+                writer.println("{\"message\": \"Database connection error\"}");
+                return;
+            }
         }
 
-        //insert into database - booking_venue
-
+        writer.println("{\"message\": \"success\"}");
     }
 
     public void destroy() {
