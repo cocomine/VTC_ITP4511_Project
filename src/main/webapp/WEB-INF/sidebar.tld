@@ -13,12 +13,6 @@
         <name>menu</name>
         <tag-class>it.itp4511.ea.taglib.sidebar.menu</tag-class>
         <body-content>scriptless</body-content>
-        <attribute>
-            <name>href</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
     </tag>
     <tag>
         <name>item</name>

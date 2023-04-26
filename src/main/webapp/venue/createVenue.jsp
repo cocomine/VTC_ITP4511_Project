@@ -8,24 +8,23 @@
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
-<sidebar:menu href="${pageContext.request.contextPath}">
+<sidebar:menu>
     <sidebar:parentItem name="Venue Booking">
-        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item>
+        <sidebar:item href="/">Book Venue</sidebar:item>
     </sidebar:parentItem>
     <!--Only Staff can see-->
     <c:if test="${user.role == 1}">
         <sidebar:parentItem name="Venue Management" active="true">
-            <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item>
-            <sidebar:item href="${pageContext.request.contextPath}/venue/create"
-                          active="true">Create Venue</sidebar:item>
-            <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item>
+            <sidebar:item href="/venue">View Venue</sidebar:item>
+            <sidebar:item href="/venue/create" active="true">Create Venue</sidebar:item>
+            <sidebar:item href="/venue/booking">View Booking</sidebar:item>
         </sidebar:parentItem>
     </c:if>
     <!--Only Senior Management can see-->
     <c:if test="${user.role == 2}">
         <sidebar:parentItem name="Account Management">
-            <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
-            <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
+            <sidebar:item href="/admin/account">View Account</sidebar:item>
+            <sidebar:item href="/admin/account/create">Create Account</sidebar:item>
         </sidebar:parentItem>
     </c:if>
     <sidebar:parentItem name="Operating Data">
