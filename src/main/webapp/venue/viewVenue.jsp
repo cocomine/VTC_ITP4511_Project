@@ -110,7 +110,7 @@
 </content:main>
 
 <content:script>
-    <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/viewVenue.js"/>
+    <content:scriptPath path="/assets/js/page/viewVenue.js"/>
 </content:script>
 
 <%@ include file="../function/footer.jsp" %>

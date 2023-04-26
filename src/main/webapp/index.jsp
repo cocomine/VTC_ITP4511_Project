@@ -185,7 +185,7 @@
 
 <!-- load this page script -->
 <content:script>
-    <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/book-venue.js"/>
+    <content:scriptPath path="/assets/js/page/book-venue.js"/>
 </content:script>
 
 <%@ include file="function/footer.jsp" %>

@@ -27,8 +27,6 @@ public class item extends SimpleTagSupport {
         HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 
         href = request.getContextPath() + href;
-        System.out.println("href: " + href);
-
         getJspBody().invoke(sw);
         String html = active ? "<li class=\"active\"><a href=\"" + href + "\">" + sw.toString() + "</a></li>" : "<li><a href=\"" + href + "\">" + sw.toString() + "</a></li>";
         getJspContext().getOut().println(html);

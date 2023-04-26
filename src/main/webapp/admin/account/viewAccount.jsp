@@ -164,7 +164,7 @@
 </div>
 
 <content:script>
-    <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/viewAccount.js"/>
+    <content:scriptPath path="/assets/js/page/viewAccount.js"/>
 </content:script>
 
 <%@ include file="../../function/footer.jsp" %>
