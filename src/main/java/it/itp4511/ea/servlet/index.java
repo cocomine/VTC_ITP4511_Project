@@ -50,7 +50,7 @@ public class index extends HttpServlet {
 
         // get all venues
         try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM venue");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM venue WHERE enable = 1");
             ResultSet result = stmt.executeQuery();
 
             ArrayList<VenueBean> venues = new ArrayList<>();
