@@ -1,4 +1,4 @@
-<%! String title = "View Order"; %>
+<%! String title = "Book Venue"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
@@ -11,6 +11,7 @@
 <sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Venue Booking" active="true">
         <sidebar:item href="${pageContext.request.contextPath}" active="true">Book Venue</sidebar:item> <!--All user can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/yourBooking.jsp">Your Booking</sidebar:item> <!--All user can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Venue Management">
         <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->

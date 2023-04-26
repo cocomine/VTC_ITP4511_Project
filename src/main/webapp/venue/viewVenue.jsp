@@ -11,6 +11,7 @@
 <sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Venue Booking">
         <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/yourBooking.jsp">Your Booking</sidebar:item> <!--All user can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Venue Management" active="true">
         <sidebar:item href="${pageContext.request.contextPath}/venue" active="true">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
