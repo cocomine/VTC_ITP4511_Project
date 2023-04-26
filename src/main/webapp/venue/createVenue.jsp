@@ -1,25 +1,33 @@
 <%! String title = "Create Venue"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="../function/head.jsp"%>
+<%@ include file="../function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
-<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
-    <sidebar:parentItem name="Venue Booking" >
-        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
+    <sidebar:parentItem name="Venue Booking">
+        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Venue Management" active="true">
-        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/create" active="true">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
-    </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management">
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
-    </sidebar:parentItem>
+    <!--Only Staff can see-->
+    <c:if test="${user.role == 1}">
+        <sidebar:parentItem name="Venue Management" active="true">
+            <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/create"
+                          active="true">Create Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
+    <!--Only Senior Management can see-->
+    <c:if test="${user.role == 2}">
+        <sidebar:parentItem name="Account Management">
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
     </sidebar:parentItem>
@@ -55,7 +63,8 @@
 
                             <div class="col-12 mb-2">
                                 <label for="location" class="form-label">Location</label>
-                                <input class="form-control" type="text" id="location" name="location" required maxlength="100">
+                                <input class="form-control" type="text" id="location" name="location" required
+                                       maxlength="100">
                                 <div class="invalid-feedback">Please enter a location.</div>
                             </div>
                             <div class="col-12 mb-2">
@@ -65,7 +74,8 @@
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="description">Venue Description</label>
-                                <textarea class="form-control" placeholder="Leave a venue description here" id="description" name="description" required maxlength="200"></textarea>
+                                <textarea class="form-control" placeholder="Leave a venue description here"
+                                          id="description" name="description" required maxlength="200"></textarea>
                                 <div class="invalid-feedback">Please enter a description.</div>
                             </div>
 
@@ -77,13 +87,15 @@
 
                             <div class="col-12 mb-2">
                                 <label for="fee" class="form-label">Booking Fee</label>
-                                <input class="form-control" type="number" id="fee" name="fee" min="0" step="0.01" required>
+                                <input class="form-control" type="number" id="fee" name="fee" min="0" step="0.01"
+                                       required>
                                 <div class="invalid-feedback">Please enter a valid fee.</div>
                             </div>
 
                             <div class="col-12 mb-2">
                                 <label for="image" class="form-label">Venue Image(Only 1 pic)</label>
-                                <input class="form-control" type="file" name="image" id="image" accept="image/png, image/jpeg, image/webp" required>
+                                <input class="form-control" type="file" name="image" id="image"
+                                       accept="image/png, image/jpeg, image/webp" required>
                                 <div class="invalid-feedback">Please select a valid image.</div>
                             </div>
                             <div class="col-12">
@@ -98,4 +110,4 @@
     </content:content>
 </content:main>
 
-<%@ include file="../function/footer.jsp"%>
+<%@ include file="../function/footer.jsp" %>

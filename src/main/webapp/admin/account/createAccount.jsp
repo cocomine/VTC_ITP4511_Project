@@ -1,25 +1,33 @@
 <%! String title = "Create Account"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="../../function/head.jsp"%>
+<%@ include file="../../function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
-<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Venue Booking">
-        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
+        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Venue Management">
-        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
-    </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management" active="true">
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create" active="true">Create Account</sidebar:item>
-    </sidebar:parentItem>
+    <!--Only Staff can see-->
+    <c:if test="${user.role == 1}">
+        <sidebar:parentItem name="Venue Management">
+            <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
+    <!--Only Senior Management can see-->
+    <c:if test="${user.role == 2}">
+        <sidebar:parentItem name="Account Management" active="true">
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account/create"
+                          active="true">Create Account</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
     </sidebar:parentItem>
@@ -55,12 +63,14 @@
 
                             <div class="col-12 mb-2">
                                 <label for="username" class="form-label">Username</label>
-                                <input class="form-control" type="text" id="username" name="username" maxlength="20" required>
+                                <input class="form-control" type="text" id="username" name="username" maxlength="20"
+                                       required>
                                 <div class="invalid-feedback">Please enter a username.</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="email" class="form-label">Email</label>
-                                <input class="form-control" type="email" id="email" name="email" maxlength="100" required>
+                                <input class="form-control" type="email" id="email" name="email" maxlength="100"
+                                       required>
                                 <div class="invalid-feedback">Please enter a valid email address.</div>
                             </div>
                             <div class="col-12 mb-2">
@@ -81,7 +91,8 @@
 
                             <b class="text-muted d-block">Role:</b>
                             <div class="form-check form-check-inline">
-                                <input type="radio" checked id="rAdministrator" name="role" class="form-check-input" value="2">
+                                <input type="radio" checked id="rAdministrator" name="role" class="form-check-input"
+                                       value="2">
                                 <label class="form-check-label" for="rAdministrator">Senior Management</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -105,4 +116,4 @@
     </content:content>
 </content:main>
 
-<%@ include file="../../function/footer.jsp"%>
+<%@ include file="../../function/footer.jsp" %>

@@ -10,17 +10,23 @@
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Venue Booking" active="true">
-        <sidebar:item href="${pageContext.request.contextPath}" active="true">Book Venue</sidebar:item> <!--All user can see-->
+        <sidebar:item href="${pageContext.request.contextPath}" active="true">Book Venue</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Venue Management">
-        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
-    </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management">
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
-    </sidebar:parentItem>
+    <!--Only Staff can see-->
+    <c:if test="${user.role == 1}">
+        <sidebar:parentItem name="Venue Management">
+            <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
+    <!--Only Senior Management can see-->
+    <c:if test="${user.role == 2}">
+        <sidebar:parentItem name="Account Management">
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
     </sidebar:parentItem>
@@ -62,7 +68,8 @@
                                 <c:forEach items="${venueList}" var="venue">
                                     <tr>
                                         <td>
-                                            <img src="${pageContext.request.contextPath}/upload/${venue.image}" alt="venue image" style="max-width: 200px; max-height: 200px">
+                                            <img src="${pageContext.request.contextPath}/upload/${venue.image}"
+                                                 alt="venue image" style="max-width: 200px; max-height: 200px">
                                         </td>
                                         <td>${venue.id}</td>
                                         <td>${venue.location}</td>
@@ -100,13 +107,13 @@
 
                         <table class="table w-100" id="selectVenue">
                             <thead class="table-dark">
-                                <tr>
-                                    <th>Venue ID</th>
-                                    <th>Name</th>
-                                    <th>Edit guest</th>
-                                    <th>Edit detail</th>
-                                    <th>Remove select</th>
-                                </tr>
+                            <tr>
+                                <th>Venue ID</th>
+                                <th>Name</th>
+                                <th>Edit guest</th>
+                                <th>Edit detail</th>
+                                <th>Remove select</th>
+                            </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -162,7 +169,9 @@
                 <div class="modal-body">
                     <div class="row" id="guestList"></div>
                     <div class="w-100">
-                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">Add new guest</button>
+                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">Add new
+                            guest
+                        </button>
                     </div>
                 </div>
                 <div class="modal-footer">

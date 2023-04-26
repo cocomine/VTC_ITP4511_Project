@@ -10,17 +10,23 @@
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Venue Booking">
-        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
+        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Venue Management" active="true">
-        <sidebar:item href="${pageContext.request.contextPath}/venue" active="true">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
-    </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management">
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
-    </sidebar:parentItem>
+    <!--Only Staff can see-->
+    <c:if test="${user.role == 1}">
+        <sidebar:parentItem name="Venue Management" active="true">
+            <sidebar:item href="${pageContext.request.contextPath}/venue" active="true">View Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
+    <!--Only Senior Management can see-->
+    <c:if test="${user.role == 2}">
+        <sidebar:parentItem name="Account Management">
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
+            <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
     <sidebar:parentItem name="Operating Data">
         <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
     </sidebar:parentItem>
