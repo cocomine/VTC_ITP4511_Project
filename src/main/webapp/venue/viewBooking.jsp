@@ -37,7 +37,7 @@
             <li><a href="">Venue Management</a></li>
             <li><span>View Booking</span></li>
         </content:directory>
-        <content:profile username="${user.username}"/>
+        <content:profile/>
     </content:header>
 
     <content:content>

@@ -38,7 +38,7 @@
             <li><a href="">Venue Booking</a></li>
             <li><span>Book Venue</span></li>
         </content:directory>
-        <content:profile username="${user.username}"/>
+        <content:profile/>
     </content:header>
 
     <content:content>
