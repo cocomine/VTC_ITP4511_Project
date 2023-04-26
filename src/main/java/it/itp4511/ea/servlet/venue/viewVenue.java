@@ -75,7 +75,7 @@ public class viewVenue extends HttpServlet {
             return;
         }
 
-        if(json.getString("type") == null) {
+        if(!(json.has("type") && json.has("id"))){
             response.setStatus(400);
             writer.println("{\"message\": \"Missing parameter\"}");
             return;
@@ -91,6 +91,22 @@ public class viewVenue extends HttpServlet {
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
                 writer.println("{\"message\": \"Venue deleted\"}");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                writer.println("{\"message\": \"Database connection error\"}");
+            }
+        }
+
+        /* Enable Disable Venue */
+        if(type.equals("enable")){
+            int id = json.getInt("id");
+            boolean enable = json.getBoolean("enable");
+            try {
+                PreparedStatement stmt = conn.prepareStatement("UPDATE venue SET enable = ? WHERE ID = ?");
+                stmt.setBoolean(1, enable);
+                stmt.setInt(2, id);
+                stmt.executeUpdate();
+                writer.println("{\"message\": \"Venue Update\"}");
             } catch (SQLException e) {
                 e.printStackTrace();
                 writer.println("{\"message\": \"Database connection error\"}");

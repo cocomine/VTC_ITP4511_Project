@@ -125,6 +125,15 @@ public class viewAccount extends HttpServlet {
 
         /* edit user */
         if("edit".equals(json.getString("type"))){
+
+            //check parameter
+            if(!(json.has("id") && json.has("username") && json.has("email") && json.has("phone") && json.has("role") && json.has("password"))) {
+                response.setStatus(400);
+                writer.println("{\"message\": \"Missing parameter\"}");
+                return;
+            }
+
+            //get parameter
             String id = json.getString("id");
             String username = json.getString("username");
             String email = json.getString("email");
@@ -132,15 +141,16 @@ public class viewAccount extends HttpServlet {
             String password = null;
             int role = json.getInt("role");
 
-            if(id == null || id.isEmpty() || username == null || username.isEmpty() || email == null || email.isEmpty() || phone == null || phone.isEmpty()) {
+            //check empty
+            if(id.isEmpty() || username.isEmpty() || email.isEmpty() || phone.isEmpty()) {
                 response.setStatus(400);
-                writer.println("{\"message\": \"Missing parameter\"}");
+                writer.println("{\"message\": \"Please fill in all the fields\"}");
                 return;
             }
 
             //change password
-            if(json.getString("password") != null) {
-                if (json.getString("C_password") == null) {
+            if(!json.isNull("password")) {
+                if (!json.has("C_password")) {
                     response.setStatus(400);
                     writer.println("{\"message\": \"Missing parameter\"}");
                     return;

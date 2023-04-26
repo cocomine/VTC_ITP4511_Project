@@ -15,6 +15,7 @@
     <sidebar:parentItem name="Venue Management">
         <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
         <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management" active="true">
         <sidebar:item href="${pageContext.request.contextPath}/admin/account" active="true">View Account</sidebar:item>

@@ -1,6 +1,6 @@
 <%! String title = "View Venue"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="../function/head.jsp"%>
+<%@ include file="../function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
 <%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
@@ -9,12 +9,13 @@
 
 <!--Menu-->
 <sidebar:menu href="${pageContext.request.contextPath}">
-    <sidebar:parentItem name="Venue Booking" >
+    <sidebar:parentItem name="Venue Booking">
         <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Venue Management" active="true">
         <sidebar:item href="${pageContext.request.contextPath}/venue" active="true">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
         <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
+        <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
     </sidebar:parentItem>
     <sidebar:parentItem name="Account Management">
         <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
@@ -60,6 +61,7 @@
                                     <th>Max Capacity</th>
                                     <th>Booking Fee</th>
                                     <th>Action</th>
+                                    <th>Enable</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -67,7 +69,8 @@
                                 <jsp:useBean id="venueList" scope="request" class="java.util.ArrayList"/>
                                 <c:forEach items="${venueList}" var="venue">
                                     <tr>
-                                        <td><img src="${pageContext.request.contextPath}/upload/${venue.image}" alt="venue image" style="max-width: 200px; max-height: 200px"></td>
+                                        <td><img src="${pageContext.request.contextPath}/upload/${venue.image}"
+                                                 alt="venue image" style="max-width: 200px; max-height: 200px"></td>
                                         <td>${venue.id}</td>
                                         <td>${venue.location}</td>
                                         <td>${venue.name}</td>
@@ -75,8 +78,16 @@
                                         <td>${venue.max}</td>
                                         <td>$ ${venue.fee}</td>
                                         <td>
-                                            <a href="${pageContext.request.contextPath}/venue/edit?id=${venue.id}"><i class="ti-pencil me-2"></i></a>
+                                            <a href="${pageContext.request.contextPath}/venue/edit?id=${venue.id}">
+                                                <i class="ti-pencil me-2"></i></a>
                                             <i class="ti-trash text-danger" data-delete="${venue.id}"></i>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="enableSwitch1" aria-label="Enable Switch" data-enable="${venue.id}"
+                                                       <c:if test="${venue.enable}">checked</c:if> >
+                                            </div>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -95,4 +106,4 @@
     <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/viewVenue.js"/>
 </content:script>
 
-<%@ include file="../function/footer.jsp"%>
+<%@ include file="../function/footer.jsp" %>
