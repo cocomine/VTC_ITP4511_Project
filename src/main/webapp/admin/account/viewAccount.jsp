@@ -10,7 +10,8 @@
 <!--Menu-->
 <sidebar:menu>
     <sidebar:parentItem name="Venue Booking">
-        <sidebar:item href="/" active="true">Book Venue</sidebar:item>
+        <sidebar:item href="/">Book Venue</sidebar:item>
+        <sidebar:item href="/booking">Your Booking</sidebar:item>
     </sidebar:parentItem>
     <!--Only Staff can see-->
     <c:if test="${user.role == 1}">

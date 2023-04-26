@@ -12,7 +12,7 @@
 <sidebar:menu>
     <sidebar:parentItem name="Venue Booking">
         <sidebar:item href="/">Book Venue</sidebar:item>
-        <sidebar:item href="/yourBooking.jsp">Your Booking</sidebar:item> <!--All user can see-->
+        <sidebar:item href="/booking">Your Booking</sidebar:item>
     </sidebar:parentItem>
     <!--Only Staff can see-->
     <c:if test="${user.role == 1}">

@@ -10,7 +10,7 @@
 <sidebar:menu>
     <sidebar:parentItem name="Venue Booking" active="true">
         <sidebar:item href="/">Book Venue</sidebar:item>
-        <sidebar:item href="/yourBooking.jsp" active="true">Your Booking</sidebar:item> <!--All user can see-->
+        <sidebar:item href="/booking" active="true">Your Booking</sidebar:item>
     </sidebar:parentItem>
     <!--Only Staff can see-->
     <c:if test="${user.role == 1}">
@@ -48,60 +48,32 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Booking List</h4>
+
+                        <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                        <alert:danger display="${!empty error_msg}">
+                            ${error_msg}
+                        </alert:danger>
+
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
                                 <thead class="text-capitalize">
                                 <tr>
                                     <th>Booking ID</th>
-                                    <th>Member's Name</th>
-                                    <th>Member's Email</th>
+                                    <th>Venue Name</th>
+                                    <th>Book date</th>
+                                    <th>Status</th>
                                     <th>Guest List</th>
-                                    <th>Action</th>
+                                    <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Oscar</td>
-                                    <td>ccc@abc.com</td>
-                                    <td>
-                                        <button type="button" class="btn btn-secondary btn-lg btn-rounded me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">See More</button>
-
-                                        <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Guest List</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="" action="">
-                                                            <div class="data-tables datatable-dark">
-                                                                <table id="dataTable3" class="text-center">
-                                                                    <thead class="text-capitalize">
-                                                                    <tr>
-                                                                        <th>Guest's name</th>
-                                                                        <th>Guest's email</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>Ada Chan</td>
-                                                                        <td>ccc@abc.com</td>
-                                                                        <td><i class="ti-close" style="color:red;"></i><td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td><i class="ti-pencil"></i><i class="ti-trash" style="color: red;"></i></td>
+                                    <td>xxx</td>
+                                    <td>xxx.xxx.xxx</td>
+                                    <td><span class="badge rounded-pill bg-primary">Primary</span></td>
+                                    <td><i class="ti-pencil" data-guestlist=""></i></td>
+                                    <td><i class="ti-pencil" data-edit=""></i></td>
                                 </tr>
                                 </tbody>
                             </table>
