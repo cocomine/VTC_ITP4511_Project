@@ -5,14 +5,6 @@
   Time: 0:43
   To change this template use File | Settings | File Templates.
 --%>
-<%
-    if(session.getAttribute("user") == null){
-        response.sendRedirect(request.getContextPath()+"/login");
-        return;
-    }else{
-        UserBean user = (UserBean) session.getAttribute("user");
-    }
-%>
 <html class="manager-view-item" lang="en">
 
 <head>

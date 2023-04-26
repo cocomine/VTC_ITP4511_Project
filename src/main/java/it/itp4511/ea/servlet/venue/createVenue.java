@@ -1,5 +1,6 @@
 package it.itp4511.ea.servlet.venue;
 
+import it.itp4511.ea.bean.UserBean;
 import it.itp4511.ea.db.dbConnect;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -71,6 +72,7 @@ public class createVenue extends HttpServlet {
         String description = request.getParameter("description");
         String max = request.getParameter("max");
         String fee = request.getParameter("fee");
+        String charge = "";
 
         // check if all fields are filled
         if (location == null || name == null || description == null || max == null || fee == null || image == null || location.isEmpty() || name.isEmpty() || description.isEmpty() || max.isEmpty() || fee.isEmpty() || image.getSize() == 0) {
@@ -116,15 +118,20 @@ public class createVenue extends HttpServlet {
             return;
         }
 
+        /* Get current user ID */
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        charge = user.getId();
+
         // insert into database
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO venue (location, name, description, max, fee, image) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO venue (location, name, description, max, fee, image, charge) VALUES (?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, location);
             stmt.setString(2, name);
             stmt.setString(3, description);
             stmt.setInt(4, Integer.parseInt(max));
             stmt.setDouble(5, Double.parseDouble(fee));
             stmt.setString(6, file_name);
+            stmt.setString(7, charge);
             stmt.executeUpdate();
 
             request.setAttribute("success_msg", "Venue created successfully.");
