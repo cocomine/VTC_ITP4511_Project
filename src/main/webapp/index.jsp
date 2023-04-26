@@ -62,8 +62,7 @@
                                 <c:forEach items="${venueList}" var="venue">
                                     <tr>
                                         <td>
-                                            <img src="${pageContext.request.contextPath}/upload/${venue.image}"
-                                                 alt="venue image" style="max-width: 200px; max-height: 200px">
+                                            <img src="${pageContext.request.contextPath}/upload/${venue.image}" alt="venue image" style="max-width: 200px; max-height: 200px">
                                         </td>
                                         <td>${venue.id}</td>
                                         <td>${venue.location}</td>
@@ -84,67 +83,73 @@
                 </div>
             </div>
             <!--Book Venue Form Start-->
-            <div class="col-6 mt-5">
-                <div class="card">
-                    <form novalidate class="needs-validation" id="bookForm">
-                        <div class="card-body">
-                            <h4 class="header-title">Book Venue</h4>
-
-                            <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
-                            <alert:danger display="${!empty error_msg}">
-                                ${error_msg}
-                            </alert:danger>
-
-                            <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
-                            <alert:success display="${!empty success_msg}">
-                                ${success_msg}
-                            </alert:success>
-
-                            <div class="col-12 mb-2">
-                                <label for="date" class="form-label">Booking Date</label>
-                                <input class="form-control" type="datetime-local" id="date" name="date" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid booking date.
-                                </div>
-                            </div>
-
-                            <div class="col-12 mb-2">
-                                <label for="template" class="form-label">Notification template for guest
-                                    invitations</label>
-                                <textarea class="form-control" id="template" name="template"></textarea>
-                            </div>
-
-                            <div class="col-12 mb-2">
-                                <button type="submit" class="btn btn-primary btn-rounded me-2">Submit</button>
-                                <button type="reset" class="btn btn-secondary btn-rounded me-2">Reset</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-6 mt-5">
+            <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Select Venue</h4>
 
+                        <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                        <alert:danger display="${!empty error_msg}">
+                            ${error_msg}
+                        </alert:danger>
+
+                        <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
+                        <alert:success display="${!empty success_msg}">
+                            ${success_msg}
+                        </alert:success>
+
                         <table class="table w-100" id="selectVenue">
                             <thead class="table-dark">
-                            <tr>
-                                <th>Venue ID</th>
-                                <th>Name</th>
-                                <th>Edit guest</th>
-                                <th>Remove select</th>
-                            </tr>
+                                <tr>
+                                    <th>Venue ID</th>
+                                    <th>Name</th>
+                                    <th>Edit guest</th>
+                                    <th>Edit detail</th>
+                                    <th>Remove select</th>
+                                </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
 
+                        <div class="col-12 mb-2">
+                            <button type="button" class="btn btn-primary btn-rounded me-2" id="submit">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </content:content>
 </content:main>
+
+<div class="modal fade" tabindex="-1" id="editDetail" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Guest list</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="detailForm" novalidate class="needs-validation">
+                <div class="modal-body">
+                    <div class="col-12 mb-2">
+                        <label for="date" class="form-label">Booking Date</label>
+                        <input class="form-control" type="datetime-local" id="date" name="date" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid booking date.
+                        </div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="template" class="form-label">Notification template for guest invitations</label>
+                        <textarea class="form-control" id="template" name="template"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-rounded">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" tabindex="-1" id="editGuest" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
@@ -155,29 +160,9 @@
             </div>
             <form id="guestListForm" novalidate class="needs-validation">
                 <div class="modal-body">
-                    <div class="row" id="guestList">
-                        <div class="col-12 mb-2">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input class="form-control" type="text" id="guest" name="name" required placeholder="Name">
-                                        <label for="guest">Name</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input class="form-control" type="text" id="email" name="email" required placeholder="Email">
-                                        <label for="email">Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" class="btn-close"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="row" id="guestList"></div>
                     <div class="w-100">
-                        <button type="button" class="btn btn-outline-primary btn-rounded" id="addGuest">Add new guest</button>
+                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">Add new guest</button>
                     </div>
                 </div>
                 <div class="modal-footer">
