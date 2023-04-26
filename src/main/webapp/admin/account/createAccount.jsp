@@ -10,6 +10,7 @@
 <!--Menu-->
 <sidebar:menu>
     <sidebar:parentItem name="Venue Booking">
+        <sidebar:item href="${pageContext.request.contextPath}/venue/yourBooking.jsp">Your Booking</sidebar:item> <!--All user can see-->
         <sidebar:item href="/">Book Venue</sidebar:item>
     </sidebar:parentItem>
     <!--Only Staff can see-->
@@ -62,14 +63,12 @@
 
                             <div class="col-12 mb-2">
                                 <label for="username" class="form-label">Username</label>
-                                <input class="form-control" type="text" id="username" name="username" maxlength="20"
-                                       required>
+                                <input class="form-control" type="text" id="username" name="username" maxlength="20" required>
                                 <div class="invalid-feedback">Please enter a username.</div>
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="email" class="form-label">Email</label>
-                                <input class="form-control" type="email" id="email" name="email" maxlength="100"
-                                       required>
+                                <input class="form-control" type="email" id="email" name="email" maxlength="100" required>
                                 <div class="invalid-feedback">Please enter a valid email address.</div>
                             </div>
                             <div class="col-12 mb-2">
@@ -90,8 +89,7 @@
 
                             <b class="text-muted d-block">Role:</b>
                             <div class="form-check form-check-inline">
-                                <input type="radio" checked id="rAdministrator" name="role" class="form-check-input"
-                                       value="2">
+                                <input type="radio" checked id="rAdministrator" name="role" class="form-check-input" value="2">
                                 <label class="form-check-label" for="rAdministrator">Senior Management</label>
                             </div>
                             <div class="form-check form-check-inline">
