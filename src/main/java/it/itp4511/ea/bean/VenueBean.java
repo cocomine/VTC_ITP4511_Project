@@ -13,11 +13,12 @@ public class VenueBean implements Serializable {
     private int max;
     private double fee;
     private String image;
+    private boolean enable = true;
 
     public VenueBean() {
     }
 
-    public VenueBean(String id, String location, String name, String description, int max, double fee, String image) {
+    public VenueBean(String id, String location, String name, String description, int max, double fee, String image, boolean enable) {
         this.id = id;
         this.location = location;
         this.name = name;
@@ -25,6 +26,7 @@ public class VenueBean implements Serializable {
         this.max = max;
         this.fee = fee;
         this.image = image;
+        this.enable = enable;
     }
 
     public String getId() {
@@ -83,6 +85,14 @@ public class VenueBean implements Serializable {
         this.image = image;
     }
 
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
     public static VenueBean getBean(ResultSet result) throws SQLException {
         VenueBean venue = new VenueBean();
         venue.setId(result.getString("ID"));
@@ -92,6 +102,7 @@ public class VenueBean implements Serializable {
         venue.setMax(result.getInt("max"));
         venue.setFee(result.getDouble("fee"));
         venue.setImage(result.getString("image"));
+        venue.setEnable(result.getBoolean("enable"));
         return venue;
     }
 }

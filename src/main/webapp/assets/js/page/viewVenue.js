@@ -20,3 +20,20 @@ $('[data-delete]').click(function () {
         }
     });
 });
+
+$('[data-enable]').change(function () {
+    const id = $(this).data('enable');
+    fetch(location.pathname, {
+        method: 'POST',
+        body: JSON.stringify({type: 'enable', id: id, enable: $(this).is(':checked')}),
+        redirect: 'error',
+        contentType: 'text/json'
+    }).then(async (res) => {
+        const json = await res.json();
+        if(res.ok){
+            toastr.success(json.message);
+        }else {
+            toastr.error(json.message);
+        }
+    });
+});

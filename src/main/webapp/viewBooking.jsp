@@ -6,7 +6,7 @@
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
-<sidebar:menu>
+<sidebar:menu href="${pageContext.request.contextPath}">
     <sidebar:parentItem name="Venue Booking">
         <sidebar:item href="index.jsp">Book Venue</sidebar:item> <!--All user can see-->
     </sidebar:parentItem>
