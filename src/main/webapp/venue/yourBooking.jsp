@@ -85,8 +85,32 @@
                                                                         <td>ccc@abc.com</td>
                                                                         <td><i class="ti-close" style="color:red;"></i><td>
                                                                     </tr>
+                                                                    <tr>
+                                                                        <td>Happy Ho</td>
+                                                                        <td>ccc@happy.com</td>
+                                                                        <td><i class="ti-close" style="color:red;"></i><td>
+                                                                    </tr>
                                                                     </tbody>
                                                                 </table>
+                                                            </div>
+                                                            <div class="col-lg-6 col-ml-12">
+                                                                <div class="row">
+                                                                    <div class="col-12 mt-5">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="form-group">
+                                                                                    <label for="guestName" class="col-form-label">Guest's Name:</label>
+                                                                                    <input type="text" class="form-control" id="guestName" value="">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="guestEmail" class="col-form-label">Guest's Email:</label>
+                                                                                    <input class="form-control" type="email" value="" id="guestEmail">
+                                                                                </div></br>
+                                                                                <button type="button" class="btn btn-secondary btn-lg btn-rounded me-2">Add New Guest</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </form>
                                                     </div>
