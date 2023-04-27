@@ -137,7 +137,7 @@
 
 <!-- load this page script -->
 <content:script>
-    <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/income.js"/>
+    <content:scriptPath path="/assets/js/page/income.js"/>
 </content:script>
 
 <%@ include file="../function/footer.jsp" %>

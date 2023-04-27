@@ -52,6 +52,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Booking Attendance by Member</h4>
+
+                        <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
+                        <alert:danger display="${!empty error_msg}">
+                            ${error_msg}
+                        </alert:danger>
+
+                        <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
+                        <alert:success display="${!empty success_msg}">
+                            ${success_msg}
+                        </alert:success>
+
                         <div class="data-tables datatable-dark">
                             <table id="dataTable3" class="text-center">
                                 <thead class="text-capitalize">
@@ -70,37 +81,7 @@
                                     <td>abc@abc.com</td>
                                     <td>12345678</td>
                                     <td>
-                                        <button type="button" class="btn btn-secondary btn-lg btn-rounded me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">See More</button>
-
-                                        <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Booking Attendance</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="" action="">
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <div class="d-sm-flex justify-content-between align-items-center">
-                                                                        <h4 class="header-title mb-0">Booking Rate</h4>
-                                                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                            <button type="button" class="btn btn-outline-primary" id="forMonthly">Monthly</button>
-                                                                            <button type="button" class="btn btn-outline-primary" id="forYearly">Yearly</button>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div id="showRecord">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <button type="button" class="btn btn-secondary btn-sm btn-rounded">See More</button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -113,9 +94,33 @@
     </content:content>
 </content:main>
 
+<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Booking Attendance</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex justify-content-between align-items-center">
+                            <h4 class="header-title mb-0">Booking Rate</h4>
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                <button type="button" class="btn btn-outline-primary" id="forMonthly">Monthly</button>
+                                <button type="button" class="btn btn-outline-primary" id="forYearly">Yearly</button>
+                            </div>
+                        </div>
+                        <div id="showRecord"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <content:script>
-    <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/booking-attendance.js"/>
+    <content:scriptPath path="/assets/js/page/booking-attendance.js"/>
 </content:script>
 
 <%@ include file="../function/footer.jsp" %>

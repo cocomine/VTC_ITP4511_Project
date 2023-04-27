@@ -71,6 +71,7 @@
                                     <th>Booking ID</th>
                                     <th>Venue Name</th>
                                     <th>Book date</th>
+                                    <th>Venue Fee</th>
                                     <th>Status</th>
                                     <th>Guest List</th>
                                     <th>Edit</th>
@@ -84,8 +85,10 @@
                                     <tr>
                                         <td>${booking.id}</td>
                                         <td>${booking.venueBean.name}</td>
-                                        <td><fmt:formatDate value="${booking.book_date}" type="date"
-                                                            dateStyle="long"/></td>
+                                        <td>
+                                            <fmt:formatDate value="${booking.book_date}" type="date" dateStyle="long"/>
+                                        </td>
+                                        <td>$ ${booking.venueBean.fee}</td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${booking.status == 0}">
