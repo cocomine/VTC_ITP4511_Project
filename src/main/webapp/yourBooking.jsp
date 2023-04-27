@@ -1,17 +1,18 @@
-<%! String title = "View Order"; %>
+<%! String title = "Your Booking"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
 <%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
 <sidebar:menu>
     <sidebar:parentItem name="Venue Booking" active="true">
-        <sidebar:item href="/" active="true">Book Venue</sidebar:item>
-        <sidebar:item href="/booking">Your Booking</sidebar:item>
+        <sidebar:item href="/">Book Venue</sidebar:item>
+        <sidebar:item href="/booking" active="true">Your Booking</sidebar:item>
     </sidebar:parentItem>
     <!--Only Staff can see-->
     <c:if test="${user.role >= 1}">
@@ -40,8 +41,8 @@
 <content:main>
     <content:header>
         <content:directory pageTitle="<%=title%>">
-            <li><a href="">Venue Booking</a></li>
-            <li><span>Book Venue</span></li>
+            <li><a href="">Venue Management</a></li>
+            <li><span>Your Booking</span></li>
         </content:directory>
         <content:profile/>
     </content:header>
@@ -52,79 +53,71 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Venue List</h4>
-                        <div class="data-tables datatable-dark">
-                            <table id="dataTable" class="text-center">
-                                <thead class="text-capitalize">
-                                <tr>
-                                    <th>Venue Image</th>
-                                    <th>Venue ID</th>
-                                    <th>Location</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Max Capacity</th>
-                                    <th>Booking Fee</th>
-                                    <th>Add select</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <jsp:useBean id="venueList" scope="request" class="java.util.ArrayList"/>
-                                <c:forEach items="${venueList}" var="venue">
-                                    <tr>
-                                        <td>
-                                            <img src="${pageContext.request.contextPath}/upload/${venue.image}"
-                                                 alt="venue image" style="max-width: 200px; max-height: 200px">
-                                        </td>
-                                        <td>${venue.id}</td>
-                                        <td>${venue.location}</td>
-                                        <td>${venue.name}</td>
-                                        <td>${venue.description}</td>
-                                        <td>${venue.max}</td>
-                                        <td>$ ${venue.fee}</td>
-                                        <td>
-                                            <i class="ti-plus" data-add="${venue.id}"></i>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Book Venue Form Start-->
-            <div class="col-12 mt-5">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title">Select Venue</h4>
+                        <h4 class="header-title">Booking List</h4>
 
                         <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
                         <alert:danger display="${!empty error_msg}">
                             ${error_msg}
                         </alert:danger>
-
                         <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
                         <alert:success display="${!empty success_msg}">
                             ${success_msg}
                         </alert:success>
 
-                        <table class="table w-100" id="selectVenue">
-                            <thead class="table-dark">
-                            <tr>
-                                <th>Venue ID</th>
-                                <th>Name</th>
-                                <th>Edit guest</th>
-                                <th>Edit detail</th>
-                                <th>Remove select</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                        <div class="data-tables datatable-dark">
+                            <table id="dataTable" class="text-center">
+                                <thead class="text-capitalize">
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Venue Name</th>
+                                    <th>Book date</th>
+                                    <th>Venue Fee</th>
+                                    <th>Status</th>
+                                    <th>Guest List</th>
+                                    <th>Edit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                        <div class="col-12 mb-2">
-                            <button type="button" class="btn btn-primary btn-rounded me-2" id="submit">Submit</button>
+                                <fmt:setLocale value="en_US"/>
+                                <jsp:useBean id="bookingList" scope="request" class="java.util.ArrayList"/>
+                                <c:forEach items="${bookingList}" var="booking">
+                                    <tr>
+                                        <td>${booking.id}</td>
+                                        <td>${booking.venueBean.name}</td>
+                                        <td>
+                                            <fmt:formatDate value="${booking.book_date}" type="date" dateStyle="long"/>
+                                        </td>
+                                        <td>$ ${booking.venueBean.fee}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${booking.status == 0}">
+                                                    <span class="badge rounded-pill bg-warning">Pending</span>
+                                                </c:when>
+                                                <c:when test="${booking.status == 1}">
+                                                    <span class="badge rounded-pill bg-success">Approved</span>
+                                                </c:when>
+                                                <c:when test="${booking.status == 2}">
+                                                    <span class="badge rounded-pill bg-danger">Rejected</span>
+                                                </c:when>
+                                            </c:choose>
+                                            <br>
+                                            <c:if test="${booking.check_in != null}">
+                                                <p>Check-in: <fmt:formatDate value="${booking.check_in}" type="time"
+                                                                             timeStyle="short"/></p>
+                                            </c:if>
+                                            <c:if test="${booking.check_out != null}">
+                                                <p>Check-out: <fmt:formatDate value="${booking.check_out}" type="time"
+                                                                              timeStyle="short"/></p>
+                                            </c:if>
+                                        </td>
+                                        <td><i class="ti-pencil" data-guestlist="${booking.id}"></i></td>
+                                        <td><i class="ti-pencil" data-edit="${booking.id}"></i></td>
+                                    </tr>
+                                </c:forEach>
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -140,8 +133,9 @@
                 <h5 class="modal-title">Guest list</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="detailForm" novalidate class="needs-validation">
+            <form id="detailForm" novalidate class="needs-validation" method="post" action="">
                 <div class="modal-body">
+                    <input name="id" id="id" type="hidden">
                     <div class="col-12 mb-2">
                         <label for="date" class="form-label">Booking Date</label>
                         <input class="form-control" type="date" id="date" name="date" required>
@@ -188,9 +182,8 @@
     </div>
 </div>
 
-<!-- load this page script -->
 <content:script>
-    <content:scriptPath path="/assets/js/page/book-venue.js"/>
+    <content:scriptPath path="/assets/js/page/yourBooking.js"/>
 </content:script>
 
 <%@ include file="function/footer.jsp" %>

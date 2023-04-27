@@ -1,13 +1,15 @@
 console.log("script loading...");
 const table = $("#dataTable").DataTable();
 
-$('[data-delete]').click(function () {
+$('#dataTable').on('click', '[data-delete]', function () {
     const id = $(this).data('delete');
     fetch(location.pathname, {
         method: 'POST',
         body: JSON.stringify({type: 'delete', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){
@@ -21,13 +23,15 @@ $('[data-delete]').click(function () {
     });
 });
 
-$('[data-enable]').change(function () {
+$('#dataTable').on('change', '[data-enable]', function () {
     const id = $(this).data('enable');
     fetch(location.pathname, {
         method: 'POST',
         body: JSON.stringify({type: 'enable', id: id, enable: $(this).is(':checked')}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){

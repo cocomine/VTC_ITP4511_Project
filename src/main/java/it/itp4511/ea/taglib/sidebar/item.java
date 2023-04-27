@@ -1,6 +1,8 @@
 package it.itp4511.ea.taglib.sidebar;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 import java.io.IOException;
@@ -21,6 +23,10 @@ public class item extends SimpleTagSupport {
     }
 
     public void doTag() throws IOException, JspException {
+        PageContext pageContext = (PageContext) getJspContext();
+        HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+
+        href = request.getContextPath() + href;
         getJspBody().invoke(sw);
         String html = active ? "<li class=\"active\"><a href=\"" + href + "\">" + sw.toString() + "</a></li>" : "<li><a href=\"" + href + "\">" + sw.toString() + "</a></li>";
         getJspContext().getOut().println(html);

@@ -1,4 +1,4 @@
-<%! String title = "View Venue"; %>
+<%! String title = "Booking Attendance"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
@@ -15,8 +15,8 @@
     </sidebar:parentItem>
     <!--Only Staff can see-->
     <c:if test="${user.role >= 1}">
-        <sidebar:parentItem name="Venue Management" active="true">
-            <sidebar:item href="/venue" active="true">View Venue</sidebar:item>
+        <sidebar:parentItem name="Venue Management">
+            <sidebar:item href="/venue">View Venue</sidebar:item>
             <sidebar:item href="/venue/create">Create Venue</sidebar:item>
             <sidebar:item href="/venue/booking">View Booking</sidebar:item>
         </sidebar:parentItem>
@@ -27,9 +27,9 @@
             <sidebar:item href="/admin/account">View Account</sidebar:item>
             <sidebar:item href="/admin/account/create">Create Account</sidebar:item>
         </sidebar:parentItem>
-        <sidebar:parentItem name="Analytic">
+        <sidebar:parentItem name="Analytic" active="true">
             <sidebar:item href="/analytic">Booking Rate</sidebar:item>
-            <sidebar:item href="/analytic/attendance">Booking Attendance</sidebar:item>
+            <sidebar:item href="/analytic/attendance" active="true">Booking Attendance</sidebar:item>
         </sidebar:parentItem>
         <sidebar:parentItem name="Report">
             <sidebar:item href="/analytic/income">Income</sidebar:item>
@@ -40,66 +40,51 @@
 <content:main>
     <content:header>
         <content:directory pageTitle="<%=title%>">
-            <li><a href="">Venue Management</a></li>
-            <li><span>View Venue</span></li>
+            <li><a href="">Analytic</a></li>
+            <li><span>Booking Attendance</span></li>
         </content:directory>
         <content:profile/>
     </content:header>
 
     <content:content>
-
         <div class="row">
-            <!--Order List Start-->
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Venue List</h4>
+                        <h4 class="header-title">Booking Attendance by Member</h4>
 
                         <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
                         <alert:danger display="${!empty error_msg}">
                             ${error_msg}
                         </alert:danger>
 
+                        <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
+                        <alert:success display="${!empty success_msg}">
+                            ${success_msg}
+                        </alert:success>
+
                         <div class="data-tables datatable-dark">
-                            <table id="dataTable" class="text-center">
+                            <table id="dataTable3" class="text-center">
                                 <thead class="text-capitalize">
                                 <tr>
-                                    <th>Venue Image</th>
-                                    <th>Venue ID</th>
-                                    <th>Location</th>
+                                    <th>Account ID</th>
                                     <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Max Capacity</th>
-                                    <th>Booking Fee</th>
-                                    <th>Action</th>
-                                    <th>Enable</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Attendance</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <jsp:useBean id="venueList" scope="request" class="java.util.ArrayList"/>
-                                <c:forEach items="${venueList}" var="venue">
+                                <jsp:useBean id="userList" scope="request" class="java.util.ArrayList"/>
+                                <c:forEach items="${userList}" var="user">
                                     <tr>
-                                        <td><img src="${pageContext.request.contextPath}/upload/${venue.image}"
-                                                 alt="venue image" style="max-width: 200px; max-height: 200px"></td>
-                                        <td>${venue.id}</td>
-                                        <td>${venue.location}</td>
-                                        <td>${venue.name}</td>
-                                        <td>${venue.description}</td>
-                                        <td>${venue.max}</td>
-                                        <td>$ ${venue.fee}</td>
+                                        <td>${user.id}</td>
+                                        <td>${user.username}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.phone}</td>
                                         <td>
-                                            <a href="${pageContext.request.contextPath}/venue/edit?id=${venue.id}">
-                                                <i class="ti-pencil me-2"></i></a>
-                                            <i class="ti-trash text-danger" data-delete="${venue.id}"></i>
-                                        </td>
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="enableSwitch1" aria-label="Enable Switch"
-                                                       data-enable="${venue.id}"
-                                                       <c:if test="${venue.enable}">checked</c:if> >
-                                            </div>
+                                            <button type="button" class="btn btn-secondary btn-sm btn-rounded" data-seemore="${user.id}">See More</button>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -114,8 +99,33 @@
     </content:content>
 </content:main>
 
+<div class="modal fade modal-xl" id="seemore" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Booking Attendance</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex justify-content-between align-items-center">
+                            <h4 class="header-title mb-0">Booking Rate</h4>
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                <button type="button" class="btn btn-outline-primary" id="forMonthly">Monthly</button>
+                                <button type="button" class="btn btn-outline-primary" id="forYearly">Yearly</button>
+                            </div>
+                        </div>
+                        <div id="showRecord"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <content:script>
-    <content:scriptPath path="/assets/js/page/viewVenue.js"/>
+    <content:scriptPath path="/assets/js/page/booking-attendance.js"/>
 </content:script>
 
 <%@ include file="../function/footer.jsp" %>

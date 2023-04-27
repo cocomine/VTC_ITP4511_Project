@@ -1,5 +1,6 @@
 package it.itp4511.ea.servlet.venue;
 
+import it.itp4511.ea.bean.UserBean;
 import it.itp4511.ea.bean.VenueBean;
 import it.itp4511.ea.db.dbConnect;
 import jakarta.servlet.RequestDispatcher;
@@ -42,9 +43,13 @@ public class viewVenue extends HttpServlet {
             return;
         }
 
+        //get current user
+        UserBean user = (UserBean) request.getAttribute("user");
+
         // get all venues
         try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM venue");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM venue WHERE charge = ?");
+            stmt.setString(1, user.getId());
             ResultSet result = stmt.executeQuery();
 
             ArrayList<VenueBean> venues = new ArrayList<>();
@@ -71,6 +76,7 @@ public class viewVenue extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         if(conn == null) {
+            response.setStatus(500);
             writer.println("{\"message\": \"Database connection error\"}");
             return;
         }

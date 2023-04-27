@@ -1,6 +1,8 @@
 package it.itp4511.ea.bean;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserBean implements Serializable {
     private String email;
@@ -10,6 +12,16 @@ public class UserBean implements Serializable {
     private String phone;
 
     public UserBean() {
+    }
+
+    public static UserBean getBean(ResultSet result) throws SQLException {
+        UserBean user = new UserBean();
+        user.setEmail(result.getString("email"));
+        user.setId(result.getString("UUID"));
+        user.setUsername(result.getString("username"));
+        user.setRole(result.getInt("role"));
+        user.setPhone(result.getString("phone"));
+        return user;
     }
 
     public UserBean(String id, String email, String username, String phone, int role) {
@@ -58,5 +70,16 @@ public class UserBean implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "\"email\":\"" + email + '\"' +
+                ", \"id\":\"" + id + '\"' +
+                ", \"username\":\"" + username + '\"' +
+                ", \"role\":" + role +
+                ", \"phone\":\"" + phone + '\"' +
+                "}";
     }
 }

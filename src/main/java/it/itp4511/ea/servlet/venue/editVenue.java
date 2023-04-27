@@ -78,36 +78,12 @@ public class editVenue extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/venue/editVenue.jsp");
-        VenueBean venue = new VenueBean();
-
         if (conn == null) {
             request.setAttribute("error_msg", "Database connection error");
-            dispatcher.forward(request, response);
+            doGet(request, response);
         }
 
-        /* get venue */
         String id = request.getQueryString().split("=")[1];
-        try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM venue WHERE id = ?");
-            stmt.setString(1, id);
-            ResultSet result = stmt.executeQuery();
-
-            if (result.next()) {
-                venue = getBean(result);
-                request.setAttribute("venue", venue);
-            } else {
-                request.setAttribute("error_msg", "Venue not found");
-                dispatcher.forward(request, response);
-                return;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            request.setAttribute("error_msg", "Database connection error");
-            dispatcher.forward(request, response);
-            return;
-        }
 
         /* start update */
         // get image
@@ -117,7 +93,7 @@ public class editVenue extends HttpServlet {
             image = request.getPart("image");
         } catch (IllegalStateException e) {
             request.setAttribute("error_msg", "Image size must be less than 5MB.");
-            dispatcher.forward(request, response);
+            doGet(request, response);
             return;
         }
 
@@ -131,21 +107,21 @@ public class editVenue extends HttpServlet {
         // check if all fields are filled
         if (location == null || name == null || description == null || max == null || fee == null || image == null || location.isEmpty() || name.isEmpty() || description.isEmpty() || max.isEmpty() || fee.isEmpty()) {
             request.setAttribute("error_msg", "Please fill in all fields.");
-            dispatcher.forward(request, response);
+            doGet(request, response);
             return;
         }
 
         // check if max and fee are numbers
         if (!max.matches("[0-9]+") || !fee.matches("[0-9]+\\.[0-9]+")) {
             request.setAttribute("error_msg", "Max and fee must be numbers.");
-            dispatcher.forward(request, response);
+            doGet(request, response);
             return;
         }
 
         // check if max and fee are positive
         if (Integer.parseInt(max) <= 0 || Double.parseDouble(fee) < 0) {
             request.setAttribute("error_msg", "Max and fee must be positive.");
-            dispatcher.forward(request, response);
+            doGet(request, response);
             return;
         }
 
@@ -171,7 +147,7 @@ public class editVenue extends HttpServlet {
                 e.printStackTrace();
 
                 request.setAttribute("error_msg", "Error saving image.");
-                dispatcher.forward(request, response);
+                doGet(request, response);
                 return;
             }
 
@@ -212,20 +188,9 @@ public class editVenue extends HttpServlet {
                 e.printStackTrace();
 
                 request.setAttribute("error_msg", "Database connection error");
-                dispatcher.forward(request, response);
+                doGet(request, response);
                 return;
             }
         }
-
-        // set venue bean and forward to editVenue.jsp page again to show updated data in form fields
-        venue.setId(id);
-        venue.setLocation(location);
-        venue.setName(name);
-        venue.setDescription(description);
-        venue.setMax(Integer.parseInt(max));
-        venue.setFee(Double.parseDouble(fee));
-
-        request.setAttribute("venue", venue);
-        dispatcher.forward(request, response);
     }
 }

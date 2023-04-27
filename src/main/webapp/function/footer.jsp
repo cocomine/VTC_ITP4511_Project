@@ -31,6 +31,15 @@
 <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/function.js"></script>
+
+<!--chart-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script>
     toastr.options = {
         "progressBar": true,
