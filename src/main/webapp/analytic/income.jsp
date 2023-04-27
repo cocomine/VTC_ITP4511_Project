@@ -61,10 +61,10 @@
                         <div class="table-responsive">
                             <table class="dbkit-table">
                                 <tr class="heading-td">
-                                    <td>Venue(Location)</td>
-                                    <td>Booking Fee</td>
-                                    <td>Monthly Income</td> <!--gen "Yearly Income" by Yearly selected-->
-                                    <td>Booking Record</td>
+                                    <th>Venue(Location)</th>
+                                    <th>Booking Fee</th>
+                                    <th>Monthly Income</th> <!--gen "Yearly Income" by Yearly selected-->
+                                    <th>Booking Record</th>
                                 </tr>
                                 <tr>
                                     <td>Lee Wai Lee</td>
