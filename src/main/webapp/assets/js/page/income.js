@@ -1,5 +1,5 @@
 console.log("script loading...");
 
 $(function() {
-    $('#forMouthly').focus();
+    $('#forMonthly').focus().click();
 });
