@@ -7,6 +7,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -37,11 +39,18 @@ public class bookingRate extends HttpServlet {
 
         //get Total Booking Rate
         try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*), v.location AS total FROM Booking b, venue v WHERE b.venue = v.id GROUP BY v.location");
+            PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) AS `count`, v.location FROM Booking b, venue v WHERE b.venue = v.id GROUP BY v.location");
             ResultSet result = stmt.executeQuery();
 
+            JSONArray total = new JSONArray();
+            while (result.next()){
+                JSONObject obj = new JSONObject();
+                obj.put("count", result.getInt("count"));
+                obj.put("location", result.getString("location"));
+                total.put(obj);
+            }
 
-            //request.setAttribute("totalRate", total);
+            request.setAttribute("totalRate", total.toString());
             dispatcher.forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();

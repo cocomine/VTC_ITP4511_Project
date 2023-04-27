@@ -1,36 +1,24 @@
 console.log("script loading...");
 
-let showRecord = '';
+const backgroundColor = ['#815DF6', '#67B7DC', '#9c82f4', '#FDD400', '#fd0059'];
+const totalRate = JSON.parse($('#totalRate').text());
 
-var chart = AmCharts.makeChart("ampiechart1", {
+// AmCharts
+const chart = AmCharts.makeChart("ampiechart1", {
     "type": "pie",
     "labelRadius": -35,
     "labelText": "[[percents]]%",
-    "dataProvider": [{
-        "venue": "Lee Wai Lee",
-        "rate": 300,
-        "backgroundColor": "#815DF6"
-    }, {
-        "venue": "Tsing Yi",
-        "rate": 370,
-        "backgroundColor": "#67B7DC"
-    }, {
-        "venue": "Chai Wan",
-        "rate": 265,
-        "backgroundColor": "#9c82f4"
-    }, {
-        "venue": "Sha Tin",
-        "rate": 243,
-        "backgroundColor": "#FDD400"
-    }, {
-        "venue": "Tuen Mun",
-        "rate": 561,
-        "backgroundColor": "#fd0059"
-    }],
+    "dataProvider": totalRate.map((rate, index) => {
+        return {
+            "location": rate.location,
+            "count": rate.count,
+            "backgroundColor": backgroundColor[index]
+        };
+    }),
     "color": "#fff",
     "colorField": "backgroundColor",
-    "valueField": "rate",
-    "titleField": "venue"
+    "valueField": "count",
+    "titleField": "location"
 });
 
 $(function() {
@@ -38,7 +26,7 @@ $(function() {
 });
 
 $('#forMonthly').click(function () {
-    showRecord = `<div class="market-status-table mt-4">
+    const showRecord = `<div class="market-status-table mt-4">
                     <div class="table-responsive">
                         <table class="dbkit-table">
                             <tr class="heading-td">
@@ -64,7 +52,7 @@ $('#forMonthly').click(function () {
 });
 
 $('#forYearly').click(function () {
-    showRecord = `<div class="market-status-table mt-4">
+    const showRecord = `<div class="market-status-table mt-4">
                     <div class="table-responsive">
                         <table class="dbkit-table">
                             <tr class="heading-td">

@@ -60,8 +60,12 @@
         <div class="row mt-5 mb-5">
             <div class="col-12">
                 <div class="card">
-                    <h4 class="header-title mb-0">Total Booking Rate</h4>
-                    <div id="ampiechart1"></div>
+                    <div class="card-body">
+                        <h4 class="header-title">Total Booking Rate</h4>
+                        <jsp:useBean id="totalRate" scope="request" class="java.lang.String"/>
+                        <pre class="d-none" id="totalRate">${totalRate}</pre>
+                        <div id="ampiechart1"></div>
+                    </div>
                 </div>
             </div>
         </div>
