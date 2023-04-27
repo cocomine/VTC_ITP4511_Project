@@ -140,7 +140,7 @@
                 <div class="modal-body">
                     <div class="col-12 mb-2">
                         <label for="date" class="form-label">Booking Date</label>
-                        <input class="form-control" type="datetime-local" id="date" name="date" required>
+                        <input class="form-control" type="date" id="date" name="date" required>
                         <div class="invalid-feedback">
                             Please provide a valid booking date.
                         </div>

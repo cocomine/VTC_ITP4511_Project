@@ -72,7 +72,7 @@
                                 </thead>
                                 <tbody>
 
-                                <fmt:setLocale value="es_US"/>
+                                <fmt:setLocale value="en_US"/>
                                 <jsp:useBean id="bookingList" scope="request" class="java.util.ArrayList"/>
                                 <c:forEach items="${bookingList}" var="booking">
                                     <tr>
@@ -80,7 +80,7 @@
                                         <td>${booking.userBean.username}</td>
                                         <td>${booking.userBean.email}</td>
                                         <td>${booking.venueBean.name}</td>
-                                        <td><fmt:formatDate value="${booking.book_date}" type="both" dateStyle="short" timeStyle="short"/></td>
+                                        <td><fmt:formatDate value="${booking.book_date}" type="date" dateStyle="long"/></td>
                                         <td>
                                             <button class="btn btn-success btn-rounded btn-sm" data-approve="${booking.id}"
                                                     <c:if test="${booking.status == 2}">disabled</c:if> >

@@ -13,6 +13,7 @@ $('[data-approve]').click(function () {
         if(res.ok){
             toastr.success(json.message);
             $(this).parent().children('[data-reject]').prop('disabled', true);
+            $(this).parents('tr').find('[data-checkin], [data-checkout]').prop('disabled', false);
         }else {
             toastr.error(json.message);
         }

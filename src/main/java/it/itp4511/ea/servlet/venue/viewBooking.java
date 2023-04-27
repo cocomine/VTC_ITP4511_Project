@@ -59,6 +59,7 @@ public class viewBooking extends HttpServlet {
             while(result.next()) {
                 BookingBean booking = BookingBean.getBean(result);
                 bookings.add(booking);
+                System.out.println(booking.getCheck_in() != null ? booking.getCheck_in().toString() : "null");
 
                 // get venue
                 stmt = conn.prepareStatement("SELECT * FROM venue v WHERE ID = ?");

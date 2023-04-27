@@ -3,6 +3,8 @@ package it.itp4511.ea.bean;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class BookingBean implements Serializable {
@@ -28,8 +30,11 @@ public class BookingBean implements Serializable {
         booking.setVenue(result.getString("venue"));
         booking.setBook_date(result.getDate("book_date"));
         booking.setGuest(result.getString("guest"));
-        booking.setCheck_in(result.getDate("check_in"));
-        booking.setCheck_out(result.getDate("check_out"));
+
+        LocalDateTime check_in = result.getObject("check_in", LocalDateTime.class);
+        if(check_in != null) booking.setCheck_in(Date.from(check_in.atZone(ZoneId.systemDefault()).toInstant()));
+        LocalDateTime check_out = result.getObject("check_out", LocalDateTime.class);
+        if(check_out != null) booking.setCheck_out(Date.from(check_out.atZone(ZoneId.systemDefault()).toInstant()));
 
         UserBean userBean = UserBean.getBean(result);
         booking.setUserBean(userBean);
