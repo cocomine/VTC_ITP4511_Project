@@ -75,15 +75,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Airi Satou</td>
-                                    <td>abc@abc.com</td>
-                                    <td>12345678</td>
-                                    <td>
-                                        <button type="button" class="btn btn-secondary btn-sm btn-rounded">See More</button>
-                                    </td>
-                                </tr>
+
+                                <jsp:useBean id="userList" scope="request" class="java.util.ArrayList"/>
+                                <c:forEach items="${userList}" var="user">
+                                    <tr>
+                                        <td>${user.id}</td>
+                                        <td>${user.username}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.phone}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-secondary btn-sm btn-rounded" data-seemore="${user.id}">See More</button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
@@ -94,7 +99,7 @@
     </content:content>
 </content:main>
 
-<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-xl" id="seemore" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

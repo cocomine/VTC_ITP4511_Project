@@ -2,7 +2,7 @@ console.log("script loading...");
 const jq_editGuest = $('#editGuest');
 const jq_editDetail = $('#editDetail');
 
-$('[data-edit]').click(function () {
+$('#dataTable').on('click', '[data-edit]', function () {
     const id = $(this).data('edit');
     fetch(location.pathname, {
         method: 'POST',
@@ -25,7 +25,7 @@ $('[data-edit]').click(function () {
     });
 });
 
-$('[data-guestlist]').click(function (e) {
+$('#dataTable').on('click', '[data-guestlist]', function (e) {
     const id = $(this).data('guestlist');
 
     fetch(location.pathname, {

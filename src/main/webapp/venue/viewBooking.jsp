@@ -102,7 +102,7 @@
                                             </button>
                                             <button class="btn btn-outline-primary btn-rounded btn-sm"
                                                     data-checkout="${booking.id}"
-                                                    <c:if test="${booking.check_out != null || booking.status != 1}">disabled</c:if> >
+                                                    <c:if test="${booking.check_out != null || booking.status != 1 || booking.check_in == null}">disabled</c:if> >
                                                 Check-out
                                             </button>
                                             <br>

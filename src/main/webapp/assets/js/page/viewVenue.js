@@ -1,7 +1,7 @@
 console.log("script loading...");
 const table = $("#dataTable").DataTable();
 
-$('[data-delete]').click(function () {
+$('#dataTable').on('click', '[data-delete]', function () {
     const id = $(this).data('delete');
     fetch(location.pathname, {
         method: 'POST',
@@ -23,7 +23,7 @@ $('[data-delete]').click(function () {
     });
 });
 
-$('[data-enable]').change(function () {
+$('#dataTable').on('change', '[data-enable]', function () {
     const id = $(this).data('enable');
     fetch(location.pathname, {
         method: 'POST',

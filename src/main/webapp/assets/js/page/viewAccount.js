@@ -70,7 +70,7 @@ $('#editForm').submit(function (e) {
     });
 });
 
-$('[data-delete]').click(function () {
+$('#dataTable').on('click', '[data-delete]', function () {
     const id = $(this).data('delete');
     fetch(location.pathname, {
         method: 'POST',

@@ -1,7 +1,7 @@
 console.log("script loading...");
 const jq_guestList = $('#guestList')
 
-$('[data-approve]').click(function () {
+$('#dataTable').on('click', '[data-approve]', function () {
     const id = $(this).data('approve');
     fetch(location.pathname, {
         method: 'POST',
@@ -15,7 +15,7 @@ $('[data-approve]').click(function () {
         if(res.ok){
             toastr.success(json.message);
             $(this).parent().children('[data-reject]').prop('disabled', true);
-            $(this).parents('tr').find('[data-checkin], [data-checkout]').prop('disabled', false);
+            $(this).parents('tr').find('[data-checkin]').prop('disabled', false);
         }else {
             toastr.error(json.message);
         }
@@ -23,7 +23,7 @@ $('[data-approve]').click(function () {
 });
 
 
-$('[data-reject]').click(function () {
+$('#dataTable').on('click', '[data-reject]', function () {
     const id = $(this).data('reject');
     fetch(location.pathname, {
         method: 'POST',
@@ -43,7 +43,7 @@ $('[data-reject]').click(function () {
     });
 });
 
-$('[data-checkin]').click(function () {
+$('#dataTable').on('click', '[data-checkin]', function () {
     const id = $(this).data('checkin');
     fetch(location.pathname, {
         method: 'POST',
@@ -57,13 +57,14 @@ $('[data-checkin]').click(function () {
         if(res.ok) {
             toastr.success(json.message);
             $(this).prop('disabled', true);
+            $(this).parent().children('[data-checkout]').prop('disabled', false);
         }else {
             toastr.error(json.message);
         }
     });
 });
 
-$('[data-checkout]').click(function () {
+$('#dataTable').on('click', '[data-checkout]', function () {
     const id = $(this).data('checkout');
     fetch(location.pathname, {
         method: 'POST',
@@ -83,7 +84,7 @@ $('[data-checkout]').click(function () {
     });
 });
 
-$('[data-guestlist]').click(function () {
+$('#dataTable').on('click', '[data-guestlist]', function () {
     const id = $(this).data('guestlist');
     fetch(location.pathname, {
         method: 'POST',

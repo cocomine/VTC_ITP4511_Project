@@ -1,67 +1,71 @@
 console.log("script loading...");
+const jq_seemore = $('#seemore');
 
-let showRecord = '';
+$('[data-seemore]').click(function () {
+    const id = $(this).data('seemore');
+    fetch(location.pathname, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id})
+    }).then(async response => {
+        const json = await response.json();
+        if(response.ok){
+            bootstrap.Modal.getOrCreateInstance(jq_seemore[0]).show();
 
-$(function() {
-    $('#forMonthly').focus().click();
+            jq_seemore.find('#forMonthly').off().click(function () {
+                console.log(json); //debug
+                jq_seemore.find('#showRecord').html(`
+                    <div class="market-status-table mt-4">
+                        <div class="table-responsive">
+                            <table class="dbkit-table">
+                                <tr class="heading-td">
+                                    <th>Month</th>
+                                    <th>No. of Booking</th>
+                                    <th>No. of Attendance</th>
+                                    <th>Attendance rate</th>
+                                </tr>
+                                ${(json.monthly.map(month => `
+                                    <tr>
+                                        <td>${month.month}</td>
+                                        <td>${month.total}</td>
+                                        <td>${month.attendance}</td>
+                                        <td>${month.avg} %</td>
+                                    </tr>`
+                                )).join('')}
+                            </table>
+                        </div>
+                    </div>`)
+            }).click();
 
-});
-
-$('#forMonthly').click(function () {
-    showRecord = `<div class="market-status-table mt-4">
+            jq_seemore.find('#forYearly').off().click(function () {
+                console.log(json); //debug
+                jq_seemore.find('#showRecord').html(`
+                <div class="market-status-table mt-4">
                     <div class="table-responsive">
                         <table class="dbkit-table">
                             <tr class="heading-td">
-                                <td>Month</td>
-                                <td>No. of Booking</td>
-                                <td>No. of Attendance</td>
-                                <td>Attendance rate</td>
+                                <th>Year</th>
+                                <th>No. of Booking</th>
+                                <th>No. of Attendance</th>
+                                <th>Attendance rate</th>
                             </tr>
-                            <tr>
-                                <td>Jan</td>
-                                <td>10</td>
-                                <td>9</td>
-                                <td>0.9</td>
-                            </tr>
-                            <tr>
-                                <td>Feb</td>
-                                <td>20</td>
-                                <td>18</td>
-                                <td>0.9</td>
-                            </tr>
+                            ${(json.yearly.map(month => `
+                                <tr>
+                                    <td>${month.year}</td>
+                                    <td>${month.total}</td>
+                                    <td>${month.attendance}</td>
+                                    <td>${month.avg} %</td>
+                                </tr>`
+                            )).join('')}
                         </table>
                     </div>
-                </div>`;
-    //以上是預約次數, 出席次數(以成功check-out 計算), 出席率(出席數/預約數)
-
-    $('#showRecord').html(showRecord);
-});
-
-$('#forYearly').click(function () {
-    showRecord = `<div class="market-status-table mt-4">
-                    <div class="table-responsive">
-                        <table class="dbkit-table">
-                            <tr class="heading-td">
-                                <td>Year</td>
-                                <td>No. of Booking</td>
-                                <td>No. of Attendance</td>
-                                <td>Attendance rate</td>
-                            </tr>
-                            <tr>
-                                <td>2021</td>
-                                <td>300</td>
-                                <td>290</td>
-                                <td>0.82</td>
-                            </tr>
-                            <tr>
-                                <td>2022</td>
-                                <td>150</td>
-                                <td>140</td>
-                                <td>0.96</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>`;
-
-    $('#showRecord').html(showRecord);
-});
+                </div>`)
+            })
+        }else {
+            toastr.error(json.message);
+        }
+    })
+})
+//以上是預約次數, 出席次數(以成功check-out 計算), 出席率(出席數/預約數)
