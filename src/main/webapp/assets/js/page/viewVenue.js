@@ -7,7 +7,9 @@ $('[data-delete]').click(function () {
         method: 'POST',
         body: JSON.stringify({type: 'delete', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){
@@ -27,7 +29,9 @@ $('[data-enable]').change(function () {
         method: 'POST',
         body: JSON.stringify({type: 'enable', id: id, enable: $(this).is(':checked')}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){

@@ -41,6 +41,23 @@ public class BookingBean implements Serializable {
         return booking;
     }
 
+    public static BookingBean getBeanWithOutUser(ResultSet result) throws SQLException {
+        BookingBean booking = new BookingBean();
+        booking.setId(result.getString("ID"));
+        booking.setStatus(result.getInt("status"));
+        booking.setUser(result.getString("user"));
+        booking.setVenue(result.getString("venue"));
+        booking.setBook_date(result.getDate("book_date"));
+        booking.setGuest(result.getString("guest"));
+
+        LocalDateTime check_in = result.getObject("check_in", LocalDateTime.class);
+        if(check_in != null) booking.setCheck_in(Date.from(check_in.atZone(ZoneId.systemDefault()).toInstant()));
+        LocalDateTime check_out = result.getObject("check_out", LocalDateTime.class);
+        if(check_out != null) booking.setCheck_out(Date.from(check_out.atZone(ZoneId.systemDefault()).toInstant()));
+
+        return booking;
+    }
+
     public VenueBean getVenueBean() {
         return venueBean;
     }
@@ -119,5 +136,21 @@ public class BookingBean implements Serializable {
 
     public void setCheck_out(Date check_out) {
         this.check_out = check_out;
+    }
+
+    @Override
+    public String toString() {
+        return "BookingBean{" +
+                "id='" + id + '\'' +
+                ", status=" + status +
+                ", user='" + user + '\'' +
+                ", venue='" + venue + '\'' +
+                ", userBean=" + userBean +
+                ", venueBean=" + venueBean +
+                ", book_date=" + book_date +
+                ", guest='" + guest + '\'' +
+                ", check_in=" + check_in +
+                ", check_out=" + check_out +
+                '}';
     }
 }

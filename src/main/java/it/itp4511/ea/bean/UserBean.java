@@ -71,4 +71,15 @@ public class UserBean implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "\"email\":\"" + email + '\"' +
+                ", \"id\":\"" + id + '\"' +
+                ", \"username\":\"" + username + '\"' +
+                ", \"role\":" + role +
+                ", \"phone\":\"" + phone + '\"' +
+                "}";
+    }
 }

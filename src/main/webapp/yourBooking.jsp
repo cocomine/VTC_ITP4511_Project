@@ -4,6 +4,8 @@
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
 <%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
@@ -53,6 +55,10 @@
                         <alert:danger display="${!empty error_msg}">
                             ${error_msg}
                         </alert:danger>
+                        <jsp:useBean id="success_msg" scope="request" class="java.lang.String"/>
+                        <alert:success display="${!empty success_msg}">
+                            ${success_msg}
+                        </alert:success>
 
                         <div class="data-tables datatable-dark">
                             <table id="dataTable" class="text-center">
@@ -67,14 +73,39 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>xxx</td>
-                                    <td>xxx.xxx.xxx</td>
-                                    <td><span class="badge rounded-pill bg-primary">Primary</span></td>
-                                    <td><i class="ti-pencil" data-guestlist=""></i></td>
-                                    <td><i class="ti-pencil" data-edit=""></i></td>
-                                </tr>
+
+                                <fmt:setLocale value="en_US"/>
+                                <jsp:useBean id="bookingList" scope="request" class="java.util.ArrayList"/>
+                                <c:forEach items="${bookingList}" var="booking">
+                                    <tr>
+                                        <td>${booking.id}</td>
+                                        <td>${booking.venueBean.name}</td>
+                                        <td><fmt:formatDate value="${booking.book_date}" type="date" dateStyle="long"/></td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${booking.status == 0}">
+                                                    <span class="badge rounded-pill bg-warning">Pending</span>
+                                                </c:when>
+                                                <c:when test="${booking.status == 1}">
+                                                    <span class="badge rounded-pill bg-success">Approved</span>
+                                                </c:when>
+                                                <c:when test="${booking.status == 2}">
+                                                    <span class="badge rounded-pill bg-danger">Rejected</span>
+                                                </c:when>
+                                            </c:choose>
+                                            <br>
+                                            <c:if test="${booking.check_in != null}">
+                                                <p>Check-in: <fmt:formatDate value="${booking.check_in}" type="time" timeStyle="short"/></p>
+                                            </c:if>
+                                            <c:if test="${booking.check_out != null}">
+                                                <p>Check-out: <fmt:formatDate value="${booking.check_out}" type="time" timeStyle="short"/></p>
+                                            </c:if>
+                                        </td>
+                                        <td><i class="ti-pencil" data-guestlist="${booking.id}"></i></td>
+                                        <td><i class="ti-pencil" data-edit="${booking.id}"></i></td>
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
@@ -84,5 +115,65 @@
         </div>
     </content:content>
 </content:main>
+
+<div class="modal fade" tabindex="-1" id="editDetail" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Guest list</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="detailForm" novalidate class="needs-validation" method="post" action="">
+                <div class="modal-body">
+                    <input name="id" id="id" type="hidden">
+                    <div class="col-12 mb-2">
+                        <label for="date" class="form-label">Booking Date</label>
+                        <input class="form-control" type="date" id="date" name="date" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid booking date.
+                        </div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="template" class="form-label">Notification template for guest invitations</label>
+                        <textarea class="form-control" id="template" name="template"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-rounded">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="editGuest" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Guest list</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="guestListForm" novalidate class="needs-validation">
+                <div class="modal-body">
+                    <div class="row" id="guestList"></div>
+                    <div class="w-100">
+                        <button type="button" class="btn btn-outline-primary btn-rounded w-100" id="addGuest">
+                            Add new guest
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-rounded">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<content:script>
+    <content:scriptPath path="/assets/js/page/yourBooking.js"/>
+</content:script>
 
 <%@ include file="function/footer.jsp"%>

@@ -9,7 +9,9 @@ $('#dataTable').on('click', '[data-edit]', function () {
         method: 'POST',
         body: JSON.stringify({type: 'detail', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){
@@ -41,7 +43,9 @@ $('#editForm').submit(function (e) {
         method: 'POST',
         body: JSON.stringify({type: 'edit', ...data}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){
@@ -72,7 +76,9 @@ $('[data-delete]').click(function () {
         method: 'POST',
         body: JSON.stringify({type: 'delete', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){

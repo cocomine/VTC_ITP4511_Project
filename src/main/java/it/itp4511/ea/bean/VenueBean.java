@@ -105,4 +105,18 @@ public class VenueBean implements Serializable {
         venue.setEnable(result.getBoolean("enable"));
         return venue;
     }
+
+    @Override
+    public String toString() {
+        return "VenueBean{" +
+                "id='" + id + '\'' +
+                ", location='" + location + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", max=" + max +
+                ", fee=" + fee +
+                ", image='" + image + '\'' +
+                ", enable=" + enable +
+                '}';
+    }
 }

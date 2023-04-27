@@ -7,7 +7,9 @@ $('[data-approve]').click(function () {
         method: 'POST',
         body: JSON.stringify({type: 'approve', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok){
@@ -27,7 +29,9 @@ $('[data-reject]').click(function () {
         method: 'POST',
         body: JSON.stringify({type: 'reject', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok) {
@@ -45,7 +49,9 @@ $('[data-checkin]').click(function () {
         method: 'POST',
         body: JSON.stringify({type: 'checkin', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok) {
@@ -63,7 +69,9 @@ $('[data-checkout]').click(function () {
         method: 'POST',
         body: JSON.stringify({type: 'checkout', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok) {
@@ -81,7 +89,9 @@ $('[data-guestlist]').click(function () {
         method: 'POST',
         body: JSON.stringify({type: 'guestlist', id: id}),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if(res.ok) {

@@ -109,21 +109,24 @@ $('#dataTable').on('click', '[data-add]', function (e) {
 
                 // create guest list
                 const guest = []
-                if (list.email instanceof Array) {
-                    // if email is array
-                    list.email.forEach((value, index) => {
-                        guest.push({
-                            name: list.name[index],
-                            email: value
+                data.guest = []; // clear guest list
+                if(list.name && list.email) {
+                    if (list.email instanceof Array) {
+                        // if email is array
+                        list.email.forEach((value, index) => {
+                            guest.push({
+                                name: list.name[index],
+                                email: value
+                            });
                         });
-                    });
-                    data.guest = guest; // update data
-                } else {
-                    // if email is string
-                    data.guest.push({
-                        name: list.name,
-                        email: list.email
-                    });
+                        data.guest = guest; // update data
+                    } else {
+                        // if email is string
+                        data.guest.push({
+                            name: list.name,
+                            email: list.email
+                        });
+                    }
                 }
             }
         })
@@ -176,7 +179,9 @@ $('#submit').click(function (e) {
         method: 'POST',
         body: JSON.stringify(selectVenue),
         redirect: 'error',
-        contentType: 'text/json'
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(async (res) => {
         const json = await res.json();
         if (res.ok) {
