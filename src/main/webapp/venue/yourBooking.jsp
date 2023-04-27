@@ -83,12 +83,12 @@
                                                                     <tr>
                                                                         <td>Ada Chan</td>
                                                                         <td>ccc@abc.com</td>
-                                                                        <td><i class="ti-close" style="color:red;"></i><td>
+                                                                        <td><i class="ti-close" style="color:red;"></i></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Happy Ho</td>
                                                                         <td>ccc@happy.com</td>
-                                                                        <td><i class="ti-close" style="color:red;"></i><td>
+                                                                        <td><i class="ti-close" style="color:red;"></i></td>
                                                                     </tr>
                                                                     </tbody>
                                                                 </table>
