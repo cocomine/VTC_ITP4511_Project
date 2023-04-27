@@ -91,8 +91,8 @@ public class bookingAttendance extends HttpServlet {
         try {
             /* Monthly */
             PreparedStatement stmt = conn.prepareStatement("SELECT MONTH(book_date) AS `month`, COUNT(*) AS `total`, " +
-                    "(SELECT COUNT(*) FROM Booking b2 WHERE b2.user = b1.user AND MONTH(b2.book_date) = month AND YEAR(b2.book_date) = YEAR(b1.book_date) AND b2.check_out IS NOT NULL GROUP BY MONTH(b2.book_date)) AS `attendance`, " +
-                    "(SELECT COUNT(*) FROM Booking b2 WHERE b2.user = b1.user AND MONTH(b2.book_date) = month AND YEAR(b2.book_date) = YEAR(b1.book_date) AND b2.check_out IS NOT NULL GROUP BY MONTH(b2.book_date)) / COUNT(*) AS `avg` " +
+                    "(SELECT COUNT(*) FROM Booking b2 WHERE b2.user = b1.user AND MONTH(b2.book_date) = month AND YEAR(b2.book_date) = YEAR(CURRENT_DATE) AND b2.check_out IS NOT NULL GROUP BY MONTH(b2.book_date)) AS `attendance`, " +
+                    "(SELECT COUNT(*) FROM Booking b2 WHERE b2.user = b1.user AND MONTH(b2.book_date) = month AND YEAR(b2.book_date) = YEAR(CURRENT_DATE) AND b2.check_out IS NOT NULL GROUP BY MONTH(b2.book_date)) / COUNT(*) AS `avg` " +
                     "FROM Booking b1 WHERE b1.user = ? AND YEAR(book_date) = YEAR(CURRENT_DATE) AND b1.status = 1 GROUP BY MONTH(book_date)");
             stmt.setString(1, id);
             ResultSet result = stmt.executeQuery();

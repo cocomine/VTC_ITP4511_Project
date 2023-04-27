@@ -76,13 +76,14 @@
                         <div class="d-sm-flex justify-content-between align-items-center">
                             <h4 class="header-title mb-0">Booking Rate</h4>
                             <div>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Select Venue</option>
-                                    <option value="selectVenue_1">Tuen Mun</option>
-                                    <option value="selectVenue_2">Sha Tin</option>
-                                    <option value="selectVenue_3">Tsing Yi</option>
-                                    <option value="selectVenue_4">Lee Wai Lee</option>
-                                    <option value="selectVenue_5">Chai Wan</option>
+                                <select class="form-select" id="selectVenue">
+                                    <option selected disabled>Select Venue</option>
+
+                                    <jsp:useBean id="venueList" scope="request" class="java.util.ArrayList"/>
+                                    <c:forEach items="${venueList}" var="venue">
+                                        <option value="${venue.id}">${venue.name}</option>
+                                    </c:forEach>
+
                                 </select>
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
