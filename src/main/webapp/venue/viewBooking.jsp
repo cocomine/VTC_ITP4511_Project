@@ -15,7 +15,7 @@
         <sidebar:item href="/booking">Your Booking</sidebar:item>
     </sidebar:parentItem>
     <!--Only Staff can see-->
-    <c:if test="${user.role == 1}">
+    <c:if test="${user.role >= 1}">
         <sidebar:parentItem name="Venue Management" active="true">
             <sidebar:item href="/venue">View Venue</sidebar:item>
             <sidebar:item href="/venue/create">Create Venue</sidebar:item>
@@ -23,7 +23,7 @@
         </sidebar:parentItem>
     </c:if>
     <!--Only Senior Management can see-->
-    <c:if test="${user.role == 2}">
+    <c:if test="${user.role >= 2}">
         <sidebar:parentItem name="Account Management">
             <sidebar:item href="/admin/account">View Account</sidebar:item>
             <sidebar:item href="/admin/account/create">Create Account</sidebar:item>
