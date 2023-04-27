@@ -23,7 +23,8 @@
         <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Analytic">
-        <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/bookingRate.jsp">Booking Rate</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/bookingAttendance.jsp">Booking Attendance</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Report">
         <sidebar:item href="${pageContext.request.contextPath}/income.jsp">Income</sidebar:item>

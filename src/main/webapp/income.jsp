@@ -23,7 +23,8 @@
         <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Analytic">
-        <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/bookingRate.jsp">Booking Rate</sidebar:item>
+        <sidebar:item href="${pageContext.request.contextPath}/bookingAttendance.jsp">Booking Attendance</sidebar:item>
     </sidebar:parentItem>
     <sidebar:parentItem name="Report" active="true">
         <sidebar:item href="${pageContext.request.contextPath}/income.jsp" active="true">Income</sidebar:item>
@@ -64,8 +65,6 @@
                                     <td>$ 446,857</td>
                                     <td>
                                         <button type="button" class="btn btn-secondary btn-lg btn-rounded me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">See More</button>
-
-
                                     </td>
                                 </tr>
                             </table>
@@ -105,7 +104,21 @@
                                 <td>Ada Chan</td>
                                 <td>ccc@abc.com</td>
                                 <td>12/6/2022</td>
-                                <td><span class="badge badge-danger">Reject</span></td>
+                                <td><button type="button" class="btn btn-flat btn-danger mb-3">Reject</button></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Ada Chan</td>
+                                <td>ccc@abc.com</td>
+                                <td>12/6/2022</td>
+                                <td><button type="button" class="btn btn-flat btn-success mb-3">Finish</button></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Ada Chan</td>
+                                <td>ccc@abc.com</td>
+                                <td>12/6/2022</td>
+                                <td><button type="button" class="btn btn-flat btn-warning mb-3">Progress</button></td>
                             </tr>
                             </tbody>
                         </table>
