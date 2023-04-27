@@ -27,10 +27,14 @@
             <sidebar:item href="/admin/account">View Account</sidebar:item>
             <sidebar:item href="/admin/account/create">Create Account</sidebar:item>
         </sidebar:parentItem>
+        <sidebar:parentItem name="Analytic">
+            <sidebar:item href="/analytic">Booking Rate</sidebar:item>
+            <sidebar:item href="/analytic/attendance">Booking Attendance</sidebar:item>
+        </sidebar:parentItem>
+        <sidebar:parentItem name="Report">
+            <sidebar:item href="/analytic/income">Income</sidebar:item>
+        </sidebar:parentItem>
     </c:if>
-    <sidebar:parentItem name="Operating Data">
-        <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
-    </sidebar:parentItem>
 </sidebar:menu>
 
 <content:main>
@@ -63,8 +67,13 @@
 
                             <div class="col-12 mb-2">
                                 <label for="location" class="form-label">Location</label>
-                                <input class="form-control" type="text" id="location" name="location" required
-                                       maxlength="100">
+                                <select class="form-select" id="location" name="location" required>
+                                    <option>Tuen Mun</option>
+                                    <option>Sha Tin</option>
+                                    <option>Tsing Yi</option>
+                                    <option>Lee Wai Lee</option>
+                                    <option>Chai Wan</option>
+                                </select>
                                 <div class="invalid-feedback">Please enter a location.</div>
                             </div>
                             <div class="col-12 mb-2">

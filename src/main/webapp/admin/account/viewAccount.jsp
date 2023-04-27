@@ -27,10 +27,14 @@
             <sidebar:item href="/admin/account" active="true">View Account</sidebar:item>
             <sidebar:item href="/admin/account/create">Create Account</sidebar:item>
         </sidebar:parentItem>
+        <sidebar:parentItem name="Analytic">
+            <sidebar:item href="/analytic">Booking Rate</sidebar:item>
+            <sidebar:item href="/analytic/attendance">Booking Attendance</sidebar:item>
+        </sidebar:parentItem>
+        <sidebar:parentItem name="Report">
+            <sidebar:item href="/analytic/income">Income</sidebar:item>
+        </sidebar:parentItem>
     </c:if>
-    <sidebar:parentItem name="Operating Data">
-        <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
-    </sidebar:parentItem>
 </sidebar:menu>
 
 <content:main>

@@ -40,7 +40,6 @@
 <script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-<script src="assets/js/pie-chart.js"></script>
 <script>
     toastr.options = {
         "progressBar": true,

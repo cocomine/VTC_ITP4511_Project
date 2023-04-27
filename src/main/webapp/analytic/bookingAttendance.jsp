@@ -1,6 +1,6 @@
 <%! String title = "Booking Attendance"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="function/head.jsp" %>
+<%@ include file="../function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
 <%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
@@ -8,27 +8,33 @@
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
 
 <!--Menu-->
-<sidebar:menu href="${pageContext.request.contextPath}">
+<sidebar:menu>
     <sidebar:parentItem name="Venue Booking">
-        <sidebar:item href="${pageContext.request.contextPath}">Book Venue</sidebar:item> <!--All user can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/yourBooking.jsp">Your Booking</sidebar:item> <!--All user can see-->
+        <sidebar:item href="/">Book Venue</sidebar:item>
+        <sidebar:item href="/booking">Your Booking</sidebar:item>
     </sidebar:parentItem>
-    <sidebar:parentItem name="Venue Management">
-        <sidebar:item href="${pageContext.request.contextPath}/venue">View Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/create">Create Venue</sidebar:item> <!--Only Admin and Operator can see-->
-        <sidebar:item href="${pageContext.request.contextPath}/venue/booking">View Booking</sidebar:item> <!--Only Admin and Operator can see-->
-    </sidebar:parentItem>
-    <sidebar:parentItem name="Account Management">
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account">View Account</sidebar:item>
-        <sidebar:item href="${pageContext.request.contextPath}/admin/account/create">Create Account</sidebar:item>
-    </sidebar:parentItem>
-    <sidebar:parentItem name="Analytic" active="true">
-        <sidebar:item href="${pageContext.request.contextPath}/bookingRate.jsp">Booking Rate</sidebar:item>
-        <sidebar:item href="${pageContext.request.contextPath}/bookingAttendance.jsp" active="true">Booking Attendance</sidebar:item>
-    </sidebar:parentItem>
-    <sidebar:parentItem name="Report">
-        <sidebar:item href="${pageContext.request.contextPath}/income.jsp">Income</sidebar:item>
-    </sidebar:parentItem>
+    <!--Only Staff can see-->
+    <c:if test="${user.role == 1}">
+        <sidebar:parentItem name="Venue Management">
+            <sidebar:item href="/venue">View Venue</sidebar:item>
+            <sidebar:item href="/venue/create">Create Venue</sidebar:item>
+            <sidebar:item href="/venue/booking">View Booking</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
+    <!--Only Senior Management can see-->
+    <c:if test="${user.role == 2}">
+        <sidebar:parentItem name="Account Management">
+            <sidebar:item href="/admin/account">View Account</sidebar:item>
+            <sidebar:item href="/admin/account/create">Create Account</sidebar:item>
+        </sidebar:parentItem>
+        <sidebar:parentItem name="Analytic" active="true">
+            <sidebar:item href="/analytic">Booking Rate</sidebar:item>
+            <sidebar:item href="/analytic/attendance" active="true">Booking Attendance</sidebar:item>
+        </sidebar:parentItem>
+        <sidebar:parentItem name="Report">
+            <sidebar:item href="/analytic/income">Income</sidebar:item>
+        </sidebar:parentItem>
+    </c:if>
 </sidebar:menu>
 
 <content:main>
@@ -37,8 +43,9 @@
             <li><a href="">Analytic</a></li>
             <li><span>Booking Attendance</span></li>
         </content:directory>
-        <content:profile username="${user.username}"/>
+        <content:profile/>
     </content:header>
+
     <content:content>
         <div class="row">
             <div class="col-12 mt-5">
@@ -111,4 +118,4 @@
     <content:scriptPath path="${pageContext.request.contextPath}/assets/js/page/booking-attendance.js"/>
 </content:script>
 
-<%@ include file="function/footer.jsp" %>
+<%@ include file="../function/footer.jsp" %>

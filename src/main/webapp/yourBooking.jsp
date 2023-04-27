@@ -1,9 +1,9 @@
 <%! String title = "Your Booking"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="function/head.jsp"%>
+<%@ include file="function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>
 <%@ taglib prefix="content" uri="/WEB-INF/content.tld" %>
-<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld"%>
+<%@ taglib prefix="alert" uri="/WEB-INF/alert.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="user" type="it.itp4511.ea.bean.UserBean" scope="session"/>
@@ -28,10 +28,14 @@
             <sidebar:item href="/admin/account">View Account</sidebar:item>
             <sidebar:item href="/admin/account/create">Create Account</sidebar:item>
         </sidebar:parentItem>
+        <sidebar:parentItem name="Analytic">
+            <sidebar:item href="/analytic">Booking Rate</sidebar:item>
+            <sidebar:item href="/analytic/attendance">Booking Attendance</sidebar:item>
+        </sidebar:parentItem>
+        <sidebar:parentItem name="Report">
+            <sidebar:item href="/analytic/income">Income</sidebar:item>
+        </sidebar:parentItem>
     </c:if>
-    <sidebar:parentItem name="Operating Data">
-        <sidebar:item href="analyticAndReport.jsp">Analytic/Report</sidebar:item>
-    </sidebar:parentItem>
 </sidebar:menu>
 
 <content:main>
@@ -80,7 +84,8 @@
                                     <tr>
                                         <td>${booking.id}</td>
                                         <td>${booking.venueBean.name}</td>
-                                        <td><fmt:formatDate value="${booking.book_date}" type="date" dateStyle="long"/></td>
+                                        <td><fmt:formatDate value="${booking.book_date}" type="date"
+                                                            dateStyle="long"/></td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${booking.status == 0}">
@@ -95,10 +100,12 @@
                                             </c:choose>
                                             <br>
                                             <c:if test="${booking.check_in != null}">
-                                                <p>Check-in: <fmt:formatDate value="${booking.check_in}" type="time" timeStyle="short"/></p>
+                                                <p>Check-in: <fmt:formatDate value="${booking.check_in}" type="time"
+                                                                             timeStyle="short"/></p>
                                             </c:if>
                                             <c:if test="${booking.check_out != null}">
-                                                <p>Check-out: <fmt:formatDate value="${booking.check_out}" type="time" timeStyle="short"/></p>
+                                                <p>Check-out: <fmt:formatDate value="${booking.check_out}" type="time"
+                                                                              timeStyle="short"/></p>
                                             </c:if>
                                         </td>
                                         <td><i class="ti-pencil" data-guestlist="${booking.id}"></i></td>
@@ -176,4 +183,4 @@
     <content:scriptPath path="/assets/js/page/yourBooking.js"/>
 </content:script>
 
-<%@ include file="function/footer.jsp"%>
+<%@ include file="function/footer.jsp" %>
