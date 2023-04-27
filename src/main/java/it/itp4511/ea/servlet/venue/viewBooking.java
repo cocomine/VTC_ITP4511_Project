@@ -49,7 +49,7 @@ public class viewBooking extends HttpServlet {
         //get current user
         UserBean user = (UserBean) request.getAttribute("user");
 
-        // get current user venues
+        // get current user venues booking
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT b.*, u.* FROM Booking b, venue v, User u WHERE b.venue = v.ID AND b.user = u.UUID AND charge = ?");
             stmt.setString(1, user.getId());
@@ -59,7 +59,6 @@ public class viewBooking extends HttpServlet {
             while(result.next()) {
                 BookingBean booking = BookingBean.getBean(result);
                 bookings.add(booking);
-                System.out.println(booking.getCheck_in() != null ? booking.getCheck_in().toString() : "null");
 
                 // get venue
                 stmt = conn.prepareStatement("SELECT * FROM venue v WHERE ID = ?");

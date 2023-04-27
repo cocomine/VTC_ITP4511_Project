@@ -76,7 +76,7 @@
                         <div class="d-sm-flex justify-content-between align-items-center">
                             <h4 class="header-title mb-0">Booking Rate</h4>
                             <div>
-                                <select class="form-select" id="selectVenue">
+                                <select class="form-select" id="selectVenue" aria-label="Select Venue">
                                     <option selected disabled>Select Venue</option>
 
                                     <jsp:useBean id="venueList" scope="request" class="java.util.ArrayList"/>

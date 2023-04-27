@@ -102,7 +102,7 @@ public class bookingRate extends HttpServlet {
         /* get venue book rate */
         try {
             /* Monthly */
-            PreparedStatement stmt = conn.prepareStatement("SELECT MONTH(book_date) as `month`, COUNT(*) as `total`, COUNT(*) / 30 as `avg` FROM Booking WHERE venue = ? AND status = 1 GROUP BY MONTH(book_date)");
+            PreparedStatement stmt = conn.prepareStatement("SELECT MONTH(book_date) as `month`, COUNT(*) as `total`, COUNT(*) / 30 as `avg` FROM Booking WHERE venue = ? AND status = 1 AND YEAR(book_date) = YEAR(CURRENT_DATE) GROUP BY MONTH(book_date)");
             stmt.setString(1, id);
             ResultSet result = stmt.executeQuery();
 
