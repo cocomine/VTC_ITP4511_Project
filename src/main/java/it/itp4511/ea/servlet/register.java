@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@WebServlet(name = "register", value = "/register")
+@WebServlet(name = "register", value = {"/register", "/register/"})
 public class register extends HttpServlet {
 
     private Connection conn;
