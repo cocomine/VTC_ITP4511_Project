@@ -53,7 +53,7 @@
                 <div class="card">
                     <form method="post" action="" novalidate class="needs-validation" enctype="multipart/form-data">
                         <div class="card-body">
-                            <h4 class="header-title">Create Venue</h4>
+                            <h4 class="header-title">Edit Venue</h4>
 
                             <jsp:useBean id="error_msg" scope="request" class="java.lang.String"/>
                             <alert:danger display="${!empty error_msg}">
@@ -70,8 +70,13 @@
                                 <input name="id" type="hidden" value="${venue.id}">
                                 <div class="col-12 mb-2">
                                     <label for="location" class="form-label">Location</label>
-                                    <input class="form-control" type="text" id="location" name="location"
-                                           value="${venue.location}" required maxlength="100">
+                                    <select class="form-select" id="location" name="location" required>
+                                        <option>Tuen Mun</option>
+                                        <option>Sha Tin</option>
+                                        <option>Tsing Yi</option>
+                                        <option>Lee Wai Lee</option>
+                                        <option>Chai Wan</option>
+                                    </select>
                                     <div class="invalid-feedback">Please enter a location.</div>
                                 </div>
                                 <div class="col-12 mb-2">

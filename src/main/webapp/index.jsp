@@ -1,4 +1,4 @@
-<%! String title = "View Order"; %>
+<%! String title = "Book Venue"; %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="function/head.jsp" %>
 <%@ taglib prefix="sidebar" uri="/WEB-INF/sidebar.tld" %>

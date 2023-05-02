@@ -99,6 +99,7 @@ public class viewVenue extends HttpServlet {
                 writer.println("{\"message\": \"Venue deleted\"}");
             } catch (SQLException e) {
                 e.printStackTrace();
+                response.setStatus(400);
                 writer.println("{\"message\": \"Database connection error\"}");
             }
         }
@@ -115,6 +116,7 @@ public class viewVenue extends HttpServlet {
                 writer.println("{\"message\": \"Venue Update\"}");
             } catch (SQLException e) {
                 e.printStackTrace();
+                response.setStatus(400);
                 writer.println("{\"message\": \"Database connection error\"}");
             }
         }
