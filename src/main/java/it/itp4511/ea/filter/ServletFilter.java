@@ -25,8 +25,8 @@ public class ServletFilter implements Filter {
 
         System.out.println("Filtering: " + httpRequest.getRequestURI());
         if(session.getAttribute("user") == null){
-            if(!httpRequest.getRequestURI().matches(".*(css|jpg|png|gif|js)")) {
-                if (!httpRequest.getRequestURI().endsWith("/login")) {
+            if(!httpRequest.getRequestURI().contains("assets")) {
+                if (!(httpRequest.getRequestURI().endsWith("/login") || httpRequest.getRequestURI().endsWith("/register"))) {
                     System.out.println("Redirecting to login page");
                     httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
                     return;
