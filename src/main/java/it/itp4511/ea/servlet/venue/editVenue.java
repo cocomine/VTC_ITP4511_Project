@@ -163,12 +163,11 @@ public class editVenue extends HttpServlet {
                 stmt.setString(7, id);
                 stmt.executeUpdate();
 
-                request.setAttribute("success_msg", "Venue created successfully.");
+                request.setAttribute("success_msg", "Venue edit successfully.");
             } catch (SQLException e) {
                 e.printStackTrace();
 
                 request.setAttribute("error_msg", "Database connection error");
-                return;
             }
         }else{
             /* not update image */
@@ -183,14 +182,13 @@ public class editVenue extends HttpServlet {
                 stmt.setString(6, id);
                 stmt.executeUpdate();
 
-                request.setAttribute("success_msg", "Venue created successfully.");
+                request.setAttribute("success_msg", "Venue edit successfully.");
             } catch (SQLException e) {
                 e.printStackTrace();
 
                 request.setAttribute("error_msg", "Database connection error");
-                doGet(request, response);
-                return;
             }
         }
+        doGet(request, response);
     }
 }
